@@ -1,0 +1,10 @@
+﻿@model WebApp.Models.CartModel
+@{
+    Layout = "~/Views/Shared/_LayoutLoggedIn.cshtml";
+}
+<div class="container">
+    <h4>Shopping cart details</h4><br/>
+    <div id="shoppingCartContainer" style=" font-size: 16px">
+        @Html.Partial("CartItemsPartial", Model)
+    </div>
+</div>

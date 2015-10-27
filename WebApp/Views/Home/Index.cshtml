@@ -1,0 +1,12 @@
+﻿@model WebApp.Models.HomeModel
+@{
+    Layout = "~/Views/Shared/_LayoutLoggedIn.cshtml";
+}
+<div class="container">
+    <div class="row">
+        @foreach (var u in Model.ProductList)
+        {
+            @Html.Partial("ProductPartial", u)
+        }
+    </div>
+</div>

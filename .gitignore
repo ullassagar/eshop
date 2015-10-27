@@ -1,0 +1,14 @@
+/packages
+/BusinessLayer/obj
+/BusinessLayer/bin
+/DataLayer/obj
+/DataLayer/bin
+/RepositoryLayer/obj
+/RepositoryLayer/bin
+/UtilityLayer/obj
+/UtilityLayer/bin
+/WebApp/bin
+/WebApp/obj
+/WebApp/Images/Products
+/WebApp/WebApp.csproj.user
+/Eshop.v12.suo

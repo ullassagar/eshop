@@ -1,0 +1,7 @@
+﻿@model WebApp.Models.CartModel
+<div style="font-size: 16px">
+    <br />
+    Total Products:&nbsp;@Html.DisplayFor(model => model.CartProductCount)&nbsp;&nbsp;&nbsp;Total Cbm:&nbsp;@Html.DisplayFor(model => model.CartTotalCbm) m&#179;&nbsp;&nbsp;&nbsp;Total Price:&nbsp;@Html.DisplayFor(model => model.CartTotalPriceOut) kr&nbsp;&nbsp;&nbsp;@Html.ActionLink("Checkout", "Index", "ShoppingCart")
+    <br />
+</div>
+<hr />

@@ -1,0 +1,91 @@
+﻿@using WebApp.Areas.Admin
+@model WebApp.Areas.Admin.Models.ProductsModel
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 border">
+            <h3>Add Product</h3>
+
+            @using (Html.BeginForm("Add", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.HiddenFor(e => e.ProductId)
+                
+                <div class="row">
+                    &nbsp;
+                </div>
+                <div class="row">
+                    <div class="col-md-2">@Html.Label("Image")</div>
+                    <div class="col-md-8"><input type="file" name="file" id="file" /></div>
+                </div>
+                <div class="row">
+                    &nbsp;
+                </div>
+                <div class="row">
+                    <div class="col-md-2">@Html.Label("Name")</div>
+                    <div class="col-md-4">@Html.TextBoxFor(u => u.ProductName, new { @class = "form-control" })</div>
+                    <div class="col-md-4">@Html.ValidationMessageFor(u => u.ProductName)</div>
+                </div>
+                <div class="row">
+                    &nbsp;
+                </div>
+                <div class="row">
+                    <div class="col-md-2">@Html.Label("EanCode")</div>
+                    <div class="col-md-4">@Html.TextBoxFor(u => u.EanCode, new { @class = "form-control" })</div>
+                    <div class="col-md-4">@Html.ValidationMessageFor(u => u.EanCode)</div>
+                </div>
+                <div class="row">
+                    &nbsp;
+                </div>
+                <div class="row">
+                    <div class="col-md-2">@Html.Label("Price")</div>
+                    <div class="col-md-2">@Html.TextBoxFor(u => u.Price, new { @class = "form-control" })</div>
+                    <div class="col-md-2">@Html.ValidationMessageFor(u => u.Price)</div>
+                </div>
+                <div class="row">
+                    &nbsp;
+                </div>
+                <div class="row">
+                    <div class="col-md-2">@Html.Label("Length")</div>
+                    <div class="col-md-4">@Html.TextBoxFor(u => u.Length, new { @class = "form-control" })</div>
+                    <div class="col-md-4">@Html.ValidationMessageFor(u => u.Length)</div>
+                </div>
+                <div class="row">
+                    &nbsp;
+                </div>
+                <div class="row">
+                    <div class="col-md-2">@Html.Label("Width")</div>
+                    <div class="col-md-4">@Html.TextBoxFor(u => u.Width, new { @class = "form-control" })</div>
+                    <div class="col-md-4">@Html.ValidationMessageFor(u => u.Width)</div>
+                </div>
+                <div class="row">
+                    &nbsp;
+                </div>
+                <div class="row">
+                    <div class="col-md-2">@Html.Label("Height")</div>
+                    <div class="col-md-4">@Html.TextBoxFor(u => u.Height, new { @class = "form-control" })</div>
+                    <div class="col-md-4">@Html.ValidationMessageFor(u => u.Height)</div>
+                </div>
+                <div class="row">
+                    &nbsp;
+                </div>
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
+                        <input type="submit" value="Submit" class="mt10 btn btn-primary" />
+                        <span>&nbsp;&nbsp;</span>
+                        @Html.ActionLink("Back", "Index", null, new { @class = "mt10 btn btn-primary" })
+                    </div>
+                </div>
+
+                if (!string.IsNullOrEmpty(@Model.Error))
+                {
+                    <div class="mt10 row">
+                        <div class="col-md-5 alert-danger">@Model.Error</div>
+                    </div>
+                }
+            }
+            <br />
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+﻿@model WebApp.Models.ProductModel
+
+<div class="col-md-3 productBox data-product-add-container">
+    <div class="productBoxImageContainer">
+        <img class="productBoxImage img-rounded" src="\Images\Products\@Model.ImageUrl" alt="@Model.ProductName">
+    </div>
+    <div style="height: 220px;">
+        <div class="text-capital"><strong>@Model.ProductName</strong></div>
+        <div class="mt10">Code: @Model.EanCode</div>
+        <div class="mt5">Length: @Model.Length cm</div>
+        <div class="mt5">Width: @Model.Width cm</div>
+        <div class="mt5">Height: @Model.Height cm</div>
+        <div class="mt5">Cbm: @Model.Cbm m&#179;</div>
+        <div class="mt10">
+            <span style="font-weight: bold">
+                Price: @Model.Price kr/st
+            </span>
+            <div style="float: right;">
+                <button type="button" class="btn btn-primary" style="width: 80px;" onclick="addProduct(this);" data-product-add-id="@Model.ProductId">Add</button>
+            </div>
+            <div style="float: right; width: 45px;">
+                <input type="text" min="1" max="99" style="width: 30px" data-product-add-count value="@Model.ProductCount" />
+            </div>
+        </div>
+    </div>
+</div>
