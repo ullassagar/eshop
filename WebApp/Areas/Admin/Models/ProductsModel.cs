@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using DataLayer;
 
 namespace WebApp.Areas.Admin.Models
@@ -6,6 +7,8 @@ namespace WebApp.Areas.Admin.Models
     public class ProductsModel
     {
         public int ProductId { get; set; }
+        [StringLength(100)]
+        [Required(ErrorMessage = "Product name required")]
         public string ProductName { get; set; }
         public string EanCode { get; set; }
         public string ImageUrl { get; set; }

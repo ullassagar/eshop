@@ -50,7 +50,7 @@ namespace RepositoryLayer
                 return ErrorCode.ErrorWhileMemberRegistrationEmailAlreadyExist;
             }
 
-            sql = string.Format(@"INSERT INTO Member(MemberName, EmailAddress, Password)
+            sql = string.Format(@"INSERT INTO Members(MemberName, EmailAddress, Password)
             VALUES('{0}','{1}','{2}');Select last_insert_id();", member.MemberName, member.EmailAddress, member.Password);
 
             member.MemberId = Convert.ToInt32(MysqlRepository.ExecuteScalar(MysqlRepository.ConnectionString_Writable, sql, null));
