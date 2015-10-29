@@ -33,13 +33,14 @@
                 <ul class="nav navbar-nav navbar-right">
                     @if (Session["PublicUser"] != null)
                     {
+                        <li>@Html.ActionLink("My Profile", "Index", "Account")</li>
                         <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
                     }
                     else
                     {
                         <li>@Html.ActionLink("Login", "Login", "Account")</li>
                     }
-                    
+
                 </ul>
             </div><!--/.navbar-collapse -->
         </div>

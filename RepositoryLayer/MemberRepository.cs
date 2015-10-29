@@ -56,5 +56,14 @@ namespace RepositoryLayer
             member.MemberId = Convert.ToInt32(MysqlRepository.ExecuteScalar(MysqlRepository.ConnectionString_Writable, sql, null));
             return ErrorCode.None;
         }
+
+        public static void Update(Member member)
+        {
+            var sql = string.Format(@"UPDATE members SET MemberName='{0}', EmailAddress='{1}', Password='{2}' WHERE MemberId={3}",
+                member.MemberName , member.EmailAddress , member.Password , member.MemberId);
+
+            MysqlRepository.ExecuteNonQueryAndCloseConnection(MysqlRepository.ConnectionString_Writable, sql, null);
+        }
+
     }
 }

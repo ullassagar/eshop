@@ -25,5 +25,12 @@ namespace BusinessLayer
 
             return MemberRepository.AddMember(member);
         }
+
+        public static void Update(Member member)
+        {
+            MemberRepository.Update(member);
+
+        }
+
     }
 }

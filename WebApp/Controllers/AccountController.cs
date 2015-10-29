@@ -11,8 +11,28 @@ namespace WebApp.Controllers
         // GET: /Account/
         public ActionResult Index()
         {
-            return View("Login");
+            var user = (PublicUser)Session[Constants.AppUserKeyName];
+            var member = MemberHandler.GetMember(user.MemberId);
+            var memberModel = MemberModeMapper.Map(member);
+            return View(memberModel);
         }
+
+        public ViewResult Edit()
+        {
+            var user = (PublicUser)Session[Constants.AppUserKeyName];
+            var profile = MemberHandler.GetMember(user.MemberId);
+            var profileModel = MemberModeMapper.Map(profile);
+            return View(profileModel);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(MemberModel model)
+        {
+            var member = MemberModeMapper.Map(model);
+            MemberHandler.Update(member);
+            return RedirectToAction("Index");
+        }
+
 
         public ActionResult Login()
         {
@@ -30,7 +50,7 @@ namespace WebApp.Controllers
                 Cart mongoCart = CartHandler.GetCart(member.MemberId);
                 Cart sessionCart = (Cart)Session[Constants.CartKeyName];
 
-                if (sessionCart != null&&sessionCart.CartItems!=null&&sessionCart.CartItems.Count>0)
+                if (sessionCart != null && sessionCart.CartItems != null && sessionCart.CartItems.Count > 0)
                 {
                     if (mongoCart != null && mongoCart.CartItems != null && mongoCart.CartItems.Count > 0)
                     {
@@ -67,13 +87,13 @@ namespace WebApp.Controllers
         {
             var member = MemberModeMapper.Map(model);
             ErrorCode error = MemberHandler.AddMember(member);
-            
+
             if (error == ErrorCode.ErrorWhileMemberRegistrationEmailEmpty)
             {
                 ViewBag.RegstrationError = "Email address can't be empty.";
                 return View("Login");
             }
-            
+
             if (error == ErrorCode.ErrorWhileMemberRegistrationPasswordEmpty)
             {
                 ViewBag.RegstrationError = "Password can't be empty.";

@@ -1,0 +1,32 @@
+﻿@model  WebApp.Areas.Admin.Models.AdminModel
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutLoggedOut.cshtml";
+}
+
+<br />
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            @using (Html.BeginForm("Login", "Admin", FormMethod.Post))
+            {<h2>Login...</h2>
+                <fieldset>
+                    <div class="mt20 row">
+                        <div class="col-md-2">@Html.Label("Email:")</div>
+                        <div class="col-md-3">@Html.TextBoxFor(u => u.EmailId, new { @placeholder = "user@email.com", @class = "form-control" })</div>
+                        <div class="col-md-3">@Html.ValidationMessageFor(u => u.EmailId)</div>
+                    </div>
+                    <div class="mt10 row">
+                        <div class="col-md-2">@Html.Label("Password:")</div>
+                        <div class="col-md-3">@Html.PasswordFor(u => u.Password, new { @placeholder = "password", @class = "form-control" })</div>
+                        <div class="col-md-3">@Html.ValidationMessageFor(u => u.Password)</div>
+                    </div>
+                    <div class="mt10 row">
+                        <div class="col-md-2"><input type="submit" class="btn btn-primary form-control" value="Login"></div>
+                    </div>
+                </fieldset>
+                <span>@ViewBag.LoginError </span><br />
+            }
+        </div>
+    </div>
+</div>

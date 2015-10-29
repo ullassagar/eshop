@@ -1,0 +1,28 @@
+﻿@using WebApp.Areas.Admin
+@model WebApp.Areas.Admin.Models.AdminModel
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutLoggedIn.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 border">
+            <h3>Admin</h3>
+            <br />
+
+            @Html.HiddenFor(m => m.UserId)
+
+            <div class="row">
+                <div class="col-md-2">@Html.Label("Name")</div>
+                <div class="col-md-2">@Html.DisplayFor(u => u.UserName, new { @class = "form-control" })</div>
+            </div>
+            <div class="mt10 row">
+                <div class="col-md-2">@Html.Label("Email")</div>
+                <div class="col-md-3">@Html.DisplayFor(u => u.EmailId, new { Class = "form-control" })</div>
+            </div>
+            @Html.ActionLink("Edit", "Edit", null, new { @class = "mt10 btn btn-primary" })
+            <br /><br />
+        </div>
+    </div>
+</div>

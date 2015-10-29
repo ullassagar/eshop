@@ -56,6 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminRepository.cs" />
     <Compile Include="CartRepository.cs" />
     <Compile Include="MemberRepository.cs" />
     <Compile Include="MysqlRepository.cs" />
