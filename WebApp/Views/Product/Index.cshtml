@@ -1,7 +1,10 @@
 ﻿@model WebApp.Models.ProductModel
 
-<div class="col-md-2 productBox data-product-add-container">
-    <div class="productBoxImageContainer">
+@{
+    Layout = "~/Views/Shared/_LayoutLoggedIn.cshtml";
+}
+<div class="productDetail">
+    <div class="productDetailImageContainer">
         <a href="@Url.Action("Index", "Product", new { id = @Model.ProductId })">
             <img class="productBoxImage img-rounded" src="\Images\Products\@Model.ImageUrl" alt="@Model.ProductName" />
         </a>

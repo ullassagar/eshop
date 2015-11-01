@@ -45,5 +45,13 @@ namespace RepositoryLayer
             return user;
         }
 
+        public static void Update(User user)
+        {
+            var sql = string.Format(@"UPDATE users SET UserName='{0}', EmailId='{1}', Password='{2}' WHERE UserId={3}",
+                user.UserName, user.EmailId, user.Password, user.UserId);
+
+            MysqlRepository.ExecuteNonQueryAndCloseConnection(MysqlRepository.ConnectionString_Writable, sql, null);
+        }
+
     }
 }

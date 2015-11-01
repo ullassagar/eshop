@@ -33,6 +33,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     @if (Session["AdminUser"] != null)
                     {
+                        <li>@Html.ActionLink("Profile", "Index", "Admin")</li>
                         <li>@Html.ActionLink("Logout", "Logout", "Admin")</li>
                     }
                     else

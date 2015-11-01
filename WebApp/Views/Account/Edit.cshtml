@@ -7,7 +7,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-8 border">
+        <div class="col-md-8">
             <h3>My Profile</h3>
             <br />
 
@@ -17,14 +17,19 @@
 
                 <div class="row">
                     <div class="col-md-2">@Html.Label("Name")</div>
-                    <div class="col-md-2">@Html.TextBoxFor(u => u.MemberName, new { @class = "form-control" })</div>
-                    <div class="col-md-2">@Html.ValidationMessageFor(u => u.MemberName)</div>
+                    <div class="col-md-3">@Html.TextBoxFor(u => u.MemberName, new { @class = "form-control" })</div>
+                    <div class="col-md-3">@Html.ValidationMessageFor(u => u.MemberName)</div>
                 </div>
                 <div class="mt10 row">
                     <div class="col-md-2">@Html.Label("Email")</div>
                     <div class="col-md-3">@Html.TextBoxFor(u => u.EmailAddress, new { Class = "form-control" })</div>
-                    <div class="col-md-2">@Html.ValidationMessageFor(u => u.MemberName)</div>
+                    <div class="col-md-3">@Html.ValidationMessageFor(u => u.EmailAddress)</div>
                 </div>
+                 <div class="mt10 row">
+                    <div class="col-md-2">@Html.Label("Password")</div>
+                    <div class="col-md-3">@Html.TextBoxFor(u => u.Password, new { Class = "form-control" })</div>
+                    <div class="col-md-3">@Html.ValidationMessageFor(u => u.Password)</div>
+                </div><br />
                 <input type="submit" value="Save" class="mt10 btn btn-primary" /><span>&nbsp;&nbsp;</span>
                 @Html.ActionLink("Back", "Index", null, new { @class = "mt10 btn btn-primary" })
 

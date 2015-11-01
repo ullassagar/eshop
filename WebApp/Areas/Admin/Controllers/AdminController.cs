@@ -8,15 +8,37 @@ namespace WebApp.Areas.Admin.Controllers
 {
     public class AdminController : Controller
     {
-        //
-        // GET: /Admin/Admin/
         public ActionResult Index()
         {
             var user = (AdminUser)Session[Constants.AdminUserKeyName];
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Admin", new { area = "Admin" });
+            }
+
             var admin = AdminHandler.GetUser(user.UserId);
             var userModel = AdminModelMapper.Map(admin);
-            return View(userModel);
+            return View("Index",userModel);
         }
+
+        [AuthorizeAdminAttribute]
+        public ViewResult Edit()
+        {
+            var user = (AdminUser)Session[Constants.AdminUserKeyName];
+            var profile = AdminHandler.GetUser(user.UserId);
+            var profileModel = AdminModelMapper.Map(profile);
+            return View(profileModel);
+        }
+
+        [HttpPost]
+        [AuthorizeAdminAttribute]
+        public ActionResult Edit(AdminModel model)
+        {
+            var user = AdminModelMapper.Map(model);
+            AdminHandler.Update(user);
+            return RedirectToAction("Index");
+        }
+
 
         public ActionResult Login()
         {
@@ -36,7 +58,6 @@ namespace WebApp.Areas.Admin.Controllers
             ViewBag.Message = "No Access!! Invalid User for this module";
             return View();
         }
-
 
         public ActionResult Logout()
         {

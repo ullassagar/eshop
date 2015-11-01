@@ -14,5 +14,11 @@ namespace BusinessLayer
        {
            return AdminRepository.GetUser(emailAddress, password);
        }
+
+       public static void Update(User user)
+       {
+           AdminRepository.Update(user);
+
+       }
     }
 }

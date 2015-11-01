@@ -57,13 +57,13 @@
             $(function () {
                 cart = {
                     refresh: function () {
-                        $.get("ShoppingCart/MiniShoppingCart", function (data) {
+                        $.get("@Url.Action("MiniShoppingCart","ShoppingCart")", function (data) {
                             $("#miniCart").html(data);
                         });
                     },
 
                     refreshShoppingCart: function () {
-                        $.get("ShoppingCart/RefreshShoppingCart", function (data) {
+                        $.get("@Url.Action("RefreshShoppingCart", "ShoppingCart")", function (data) {
                             $("#shoppingCartContainer").html(data);
                         });
                     }

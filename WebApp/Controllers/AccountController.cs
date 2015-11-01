@@ -7,8 +7,7 @@ namespace WebApp.Controllers
 {
     public class AccountController : Controller
     {
-        //
-        // GET: /Account/
+        [AuthorizeUser]
         public ActionResult Index()
         {
             var user = (PublicUser)Session[Constants.AppUserKeyName];
@@ -17,22 +16,23 @@ namespace WebApp.Controllers
             return View(memberModel);
         }
 
+        [AuthorizeUser]
         public ViewResult Edit()
         {
             var user = (PublicUser)Session[Constants.AppUserKeyName];
-            var profile = MemberHandler.GetMember(user.MemberId);
-            var profileModel = MemberModeMapper.Map(profile);
-            return View(profileModel);
+            var member = MemberHandler.GetMember(user.MemberId);
+            var memberModel = MemberModeMapper.Map(member);
+            return View(memberModel);
         }
 
         [HttpPost]
+        [AuthorizeUser]
         public ActionResult Edit(MemberModel model)
         {
             var member = MemberModeMapper.Map(model);
             MemberHandler.Update(member);
             return RedirectToAction("Index");
         }
-
 
         public ActionResult Login()
         {
@@ -47,8 +47,8 @@ namespace WebApp.Controllers
             {
                 Session[Constants.AppUserKeyName] = PublicUser.GetCurrentUser(member);
 
-                Cart mongoCart = CartHandler.GetCart(member.MemberId);
-                Cart sessionCart = (Cart)Session[Constants.CartKeyName];
+                var mongoCart = CartHandler.GetCart(member.MemberId);
+                var sessionCart = (Cart)Session[Constants.CartKeyName];
 
                 if (sessionCart != null && sessionCart.CartItems != null && sessionCart.CartItems.Count > 0)
                 {
@@ -86,7 +86,7 @@ namespace WebApp.Controllers
         public ActionResult Register(MemberModel model)
         {
             var member = MemberModeMapper.Map(model);
-            ErrorCode error = MemberHandler.AddMember(member);
+            var error = MemberHandler.AddMember(member);
 
             if (error == ErrorCode.ErrorWhileMemberRegistrationEmailEmpty)
             {
@@ -110,6 +110,7 @@ namespace WebApp.Controllers
             return RedirectToAction("Index", "Home", new { area = "" });
         }
 
+        [AuthorizeUser]
         public ActionResult Logout()
         {
             Session.Abandon();
