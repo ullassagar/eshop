@@ -217,7 +217,7 @@
     <Content Include="Areas\Admin\Views\Products\Add.cshtml" />
     <Content Include="Areas\Admin\Views\Products\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Products\ImageUpload.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\ViewProfile.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\Login.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_LayoutLoggedOut.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\Edit.cshtml" />

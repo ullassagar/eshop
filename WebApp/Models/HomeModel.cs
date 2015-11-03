@@ -28,6 +28,7 @@ namespace WebApp.Models
 
         [Range(1, 20)]
         public int ProductCount { get; set; }
+        public string Description { get; set; }
 
         public ProductModel()
         {
@@ -51,6 +52,7 @@ namespace WebApp.Models
                 model.Width = product.Width;
                 model.Height = product.Height;
                 model.Cbm = product.Cbm;
+                model.Description = product.Description;
             }
             return model;
         }

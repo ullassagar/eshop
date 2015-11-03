@@ -74,7 +74,8 @@
             function addProduct(btn) {
                 var id = $(btn).attr('data-product-add-id');
                 var count = $(btn).parents('.data-product-add-container').find('[data-product-add-count]').val();
-                $.get("ShoppingCart/Add?productId=" + id + "&productCount=" + count, function (data) {
+                var url = "@Url.Action("Add", "ShoppingCart")" + "?productId=" + id + "&productCount=" + count;
+                $.get(url, function (data) {
                     cart.refresh();
                 });
             }

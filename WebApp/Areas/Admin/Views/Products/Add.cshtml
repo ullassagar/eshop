@@ -68,6 +68,14 @@
                 <div class="row">
                     &nbsp;
                 </div>
+                 <div class="row">
+                    <div class="col-md-2">@Html.Label("Description")</div>
+                    <div class="col-md-4">@Html.TextAreaFor(u => u.Description, new { @class = "form-control" })</div>
+                    <div class="col-md-4">@Html.ValidationMessageFor(u => u.Description)</div>
+                </div>
+                <div class="row">
+                    &nbsp;
+                </div>
                 <div class="row">
                     <div class="col-md-2"></div>
                     <div class="col-md-8">

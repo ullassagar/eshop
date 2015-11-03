@@ -60,6 +60,7 @@
     <Compile Include="CartRepository.cs" />
     <Compile Include="MemberRepository.cs" />
     <Compile Include="MysqlRepository.cs" />
+    <Compile Include="OrdersRepository.cs" />
     <Compile Include="ProductRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

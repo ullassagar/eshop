@@ -15,10 +15,21 @@ namespace WebApp.Areas.Admin.Controllers
             {
                 return RedirectToAction("Login", "Admin", new { area = "Admin" });
             }
+            return RedirectToAction("Index", "Products", new { area = "Admin" });
+        }
+
+        [AuthorizeAdminAttribute]
+        public ActionResult ViewProfile()
+        {
+            var user = (AdminUser)Session[Constants.AdminUserKeyName];
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Admin", new { area = "Admin" });
+            }
 
             var admin = AdminHandler.GetUser(user.UserId);
             var userModel = AdminModelMapper.Map(admin);
-            return View("Index",userModel);
+            return View("ViewProfile", userModel);
         }
 
         [AuthorizeAdminAttribute]

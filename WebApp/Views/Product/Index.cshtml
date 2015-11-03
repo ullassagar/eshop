@@ -3,7 +3,7 @@
 @{
     Layout = "~/Views/Shared/_LayoutLoggedIn.cshtml";
 }
-<div class="productDetail">
+<div class="productDetail data-product-add-container">
     <div class="productDetailImageContainer">
         <a href="@Url.Action("Index", "Product", new { id = @Model.ProductId })">
             <img class="productBoxImage img-rounded" src="\Images\Products\@Model.ImageUrl" alt="@Model.ProductName" />
@@ -29,5 +29,6 @@
             <input type="text" class="productBoxCount" min="1" max="99" data-product-add-count value="@Model.ProductCount" />
             <button type="button" class="btn btn-primary productBoxBuy" onclick="addProduct(this);" data-product-add-id="@Model.ProductId">Add</button>
         </div>
+        <div class="mt5">Description: @Model.Description</div>
     </div>
 </div>

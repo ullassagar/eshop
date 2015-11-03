@@ -27,7 +27,7 @@
                 </div><br />
                 <div class="mt10 row">
                     <div class="col-md-2">@Html.Label("Password")</div>
-                    <div class="col-md-3">@Html.TextBoxFor(u => u.Password, new { Class = "form-control" })</div>
+                    <div class="col-md-3">@Html.PasswordFor(u => u.Password, new { Class = "form-control" })</div>
                     <div class="col-md-2">@Html.ValidationMessageFor(u => u.Password)</div>
                 </div><br />
                 <input type="submit" value="Save" class="mt10 btn btn-primary" /><span>&nbsp;&nbsp;</span>

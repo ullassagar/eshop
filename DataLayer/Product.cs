@@ -22,6 +22,7 @@ namespace DataLayer
         {
             get { return Math.Round(((decimal)(Length * Width * Height) / 1000), 2); }
         }
+        public string Description { get; set; }
 
         public static Product Load(IDataReader reader)
         {
@@ -34,6 +35,7 @@ namespace DataLayer
             product.Length = DbHelper.ConvertToInt32(reader["Length"]);
             product.Width = DbHelper.ConvertToInt32(reader["Width"]);
             product.Height = DbHelper.ConvertToInt32(reader["Height"]);
+            product.Description = DbHelper.ConvertToString(reader["Description"]);
             return product;
         }
     }

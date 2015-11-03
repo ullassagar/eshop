@@ -20,6 +20,8 @@ namespace WebApp.Areas.Admin.Models
         {
             get { return Length * Width * Height; }
         }
+        public string Description { get; set; }
+
         public string Error { get; set; }
 
         public List<ProductsModel> ProductList { get; set; }
@@ -44,6 +46,7 @@ namespace WebApp.Areas.Admin.Models
                 model.Length = product.Length;
                 model.Width = product.Width;
                 model.Height = product.Height;
+                model.Description = product.Description;
             }
             return model;
         }
@@ -61,6 +64,7 @@ namespace WebApp.Areas.Admin.Models
                 product.Length = model.Length;
                 product.Width = model.Width;
                 product.Height = model.Height;
+                product.Description = model.Description;
             }
             return product;
         }
