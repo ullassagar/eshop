@@ -54,6 +54,7 @@
     <Compile Include="AdminHandler.cs" />
     <Compile Include="CartHandler.cs" />
     <Compile Include="MemberHandler.cs" />
+    <Compile Include="OrderHandler.cs" />
     <Compile Include="ProductHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

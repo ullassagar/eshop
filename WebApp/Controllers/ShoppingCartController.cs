@@ -50,6 +50,17 @@ namespace WebApp.Controllers
             return PartialView("CartItemsPartial", model);
         }
 
+        public ActionResult Confirm()
+        {
+            var cart = GetCart();
+            OrderHandler.AddOrder(cart);
+
+            Session[Constants.CartKeyName] = new Cart();
+            CartHandler.SaveCart(cart);
+
+            return View("Confirm");
+        }
+
         private Cart GetCart()
         {
             var member = PublicUser.GetCurrentUser();

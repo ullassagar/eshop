@@ -1,0 +1,15 @@
+﻿@model List<int>
+
+@{
+    var member = PublicUser.GetCurrentUser();
+    var list = BusinessLayer.OrderHandler.GetOrderIds(member.MemberId);
+    Layout = "~/Views/Shared/_LayoutLoggedIn.cshtml";
+}
+
+<div class="container">
+    <h4>Orders</h4><br />
+    @foreach (var id in list)
+    {
+        @Html.ActionLink("Show", "Orders", new { orderId = id });
+    }
+</div>

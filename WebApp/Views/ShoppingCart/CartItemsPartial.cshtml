@@ -69,6 +69,10 @@
     <div class="col-md-2 text-right">Total Price:</div>
     <div class="col-md-2">@Html.DisplayFor(model => model.CartTotalPriceOut) kr</div>
 </div>
-<div>
-    <button type="button" class="btn btn-primary">Confirm</button>
+<div class="row right">
+    @using (Html.BeginForm("Confirm", "ShoppingCart", FormMethod.Post))
+    {
+        <input type="submit" value="Confirm" class="mt10 btn btn-primary" />
+        <span>@ViewBag.message </span><br />
+    }
 </div>
