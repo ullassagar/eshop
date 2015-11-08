@@ -14,7 +14,7 @@ namespace RepositoryLayer
         {
             var sql = string.Format(@"INSERT INTO orders(MemberId) VALUES({0});select last_insert_id();", cart.MemberId);
 
-            int orderId = Convert.ToInt32(MysqlRepository.ExecuteScalar(MysqlRepository.ConnectionString_Writable, sql, null));
+            var orderId = Convert.ToInt32(MysqlRepository.ExecuteScalar(MysqlRepository.ConnectionString_Writable, sql, null));
 
             if (orderId > 0 && cart.CartItems != null)
             {
@@ -31,8 +31,8 @@ namespace RepositoryLayer
 
         public static List<int> GetOrderIds(int memberId)
         {
-            List<int> list = new List<int>();
-            var sql = string.Format(@"SELECT OrderId FROM orders WHERE MemberId = {0}");
+            var list = new List<int>();
+            var sql = string.Format(@"SELECT OrderId FROM orders WHERE MemberId = {0}", memberId);
             var reader = MysqlRepository.ExecuteReader(MysqlRepository.ConnectionString_ReadOnly, CommandType.Text, sql);
             while (reader.Read())
             {

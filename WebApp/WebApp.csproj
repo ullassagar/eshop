@@ -170,11 +170,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Code\AuthorizeAdminAttribute.cs" />
-    <Compile Include="App_Code\Constants.cs" />
-    <Compile Include="App_Code\AuthorizeUserAttribute.cs" />
-    <Compile Include="App_Code\PublicUser.cs" />
-    <Compile Include="App_Code\AdminUser.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
@@ -258,6 +253,7 @@
     <Content Include="Views\Orders\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Code\" />
     <Folder Include="App_Data\" />
     <Folder Include="Images\Products\" />
   </ItemGroup>
@@ -295,6 +291,10 @@
     <ProjectReference Include="..\UtilityLayer\UtilityLayer.csproj">
       <Project>{205c0927-faa6-4e52-8216-d0f13486bea7}</Project>
       <Name>UtilityLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebCommon\WebCommon.csproj">
+      <Project>{7eb83941-9111-4953-a116-652f8c63324b}</Project>
+      <Name>WebCommon</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
