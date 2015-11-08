@@ -1,8 +1,10 @@
-﻿@model List<int>
+﻿@using BusinessLayer
+@model List<int>
 
 @{
-    var member = WebApp.PublicUser.GetCurrentUser();
-    var list = BusinessLayer.OrderHandler.GetOrderIds(member.MemberId);
+    var member = PublicUser.GetCurrentUser();
+    var orderHandler = new OrderHandler();
+    var list = orderHandler.GetOrderIds(member.MemberId);
     Layout = "~/Views/Shared/_LayoutLoggedIn.cshtml";
 }
 

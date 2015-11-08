@@ -56,7 +56,8 @@ namespace WebApp.Controllers
         public ActionResult Confirm()
         {
             var cart = GetCart();
-            OrderHandler.AddOrder(cart);
+            var orderHandler = new OrderHandler();
+            orderHandler.AddOrder(cart);
 
             Session[Constants.CartKeyName] = new Cart();
             var cartHandler = new CartHandler(); 

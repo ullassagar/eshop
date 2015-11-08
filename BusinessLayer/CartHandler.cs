@@ -25,7 +25,8 @@ namespace BusinessLayer
 
         public void AddProduct(int productId, int productCount, Cart cart)
         {
-            var product = ProductHandler.GetProduct(productId);
+            var productHandler = new ProductHandler();
+            var product = productHandler.GetProduct(productId);
             if (product != null)
             {
                 if (cart.CartItems == null)
@@ -50,7 +51,8 @@ namespace BusinessLayer
 
         public void ChangeProductCount(int productId, int productCount, Cart cart)
         {
-            var product = ProductHandler.GetProduct(productId);
+            var productHandler = new ProductHandler();
+            var product = productHandler.GetProduct(productId);
             if (product != null)
             {
                 if (cart.CartItems == null)

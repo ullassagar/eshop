@@ -12,7 +12,8 @@ namespace WebApp.Areas.Admin.Controllers
         public ActionResult Index()
         {
             var model = new ProductsModel();
-            var proList = ProductHandler.GetList();
+            var productHandler = new ProductHandler();
+            var proList = productHandler.GetList();
 
             foreach (var pro in proList)
             {
@@ -36,7 +37,8 @@ namespace WebApp.Areas.Admin.Controllers
 
             try
             {
-                ProductHandler.Add(product);
+                var productHandler = new ProductHandler();
+                productHandler.Add(product);
 
                 product.ImageUrl = product.ProductId + ".png";
                 if (file != null && file.ContentLength > 0)
@@ -45,7 +47,7 @@ namespace WebApp.Areas.Admin.Controllers
                     file.SaveAs(path);
                 }
       
-                ProductHandler.Update(product);
+                productHandler.Update(product);
             }
             catch (Exception ex)
             {
@@ -58,7 +60,8 @@ namespace WebApp.Areas.Admin.Controllers
 
         public ActionResult Edit(int id = 0)
         {
-            var product = ProductHandler.GetProduct(id);
+            var productHandler = new ProductHandler();
+            var product = productHandler.GetProduct(id);
 
             var proModel = ProductModelMapper.MapToProductModel(product);
 
@@ -77,7 +80,8 @@ namespace WebApp.Areas.Admin.Controllers
                 }
 
                 var product = ProductModelMapper.MapToProduct(model);
-                ProductHandler.Update(product);
+                var productHandler = new ProductHandler();
+                productHandler.Update(product);
             }
             catch (Exception ex)
             {
@@ -90,7 +94,8 @@ namespace WebApp.Areas.Admin.Controllers
 
         public ActionResult Delete(int id = 0)
         {
-            ProductHandler.Delete(id);
+            var productHandler = new ProductHandler();
+            productHandler.Delete(id);
             return RedirectToAction("Index");
         }
 

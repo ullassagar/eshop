@@ -6,29 +6,36 @@ namespace BusinessLayer
 {
     public class ProductHandler
     {
-        public static List<Product> GetList()
+        private readonly IProductRepository _productRepository;
+
+        public ProductHandler()
         {
-            return ProductRepository.GetList();
+            _productRepository = new ProductRepository();
         }
 
-        public static void Add(Product product)
+        public List<Product> GetList()
         {
-            ProductRepository.Add(product);
+            return _productRepository.GetList();
         }
 
-        public static Product GetProduct(int productId)
+        public void Add(Product product)
         {
-            return ProductRepository.GetProduct(productId);
+            _productRepository.Add(product);
         }
 
-        public static void Update(Product product)
+        public Product GetProduct(int productId)
         {
-            ProductRepository.Update(product);
+            return _productRepository.GetProduct(productId);
         }
 
-        public static void Delete(int id)
+        public void Update(Product product)
         {
-            ProductRepository.Delete(id);
+            _productRepository.Update(product);
+        }
+
+        public void Delete(int id)
+        {
+            _productRepository.Delete(id);
         }
     }
 }

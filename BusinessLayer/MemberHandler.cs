@@ -5,7 +5,7 @@ namespace BusinessLayer
 {
     public class MemberHandler
     {
-        private readonly MemberRepository _memberRepository = null;
+        private readonly IMemberRepository _memberRepository = null;
 
         public MemberHandler()
         {

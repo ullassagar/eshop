@@ -10,7 +10,8 @@ namespace WebApp.Controllers
         public ActionResult Index()
         {
             var model = new HomeModel();
-            var products = ProductHandler.GetList();
+            var productHandler = new ProductHandler();
+            var products = productHandler.GetList();
 
             foreach(var product in products)
             {

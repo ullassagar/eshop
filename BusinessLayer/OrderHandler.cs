@@ -1,23 +1,26 @@
-﻿using DataLayer;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using DataLayer;
 using RepositoryLayer;
 
 namespace BusinessLayer
 {
     public class OrderHandler
     {
-        public static int AddOrder(Cart cart)
+        private readonly IOrdersRepository _ordersRepository;
+
+        public OrderHandler()
         {
-            return OrdersRepository.AddOrder(cart);
+            _ordersRepository = new OrdersRepository();
         }
 
-        public static List<int> GetOrderIds(int memberId)
+        public int AddOrder(Cart cart)
         {
-            return OrdersRepository.GetOrderIds(memberId);
+            return _ordersRepository.AddOrder(cart);
+        }
+
+        public List<int> GetOrderIds(int memberId)
+        {
+            return _ordersRepository.GetOrderIds(memberId);
         }
     }
 }

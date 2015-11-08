@@ -6,9 +6,9 @@ using System.Data;
 
 namespace RepositoryLayer
 {
-    public class OrdersRepository
+    public class OrdersRepository : IOrdersRepository
     {
-        public static int AddOrder(Cart cart)
+        public int AddOrder(Cart cart)
         {
             string sql = string.Format(@"INSERT INTO orders(MemberId) VALUES({0});select last_insert_id();", cart.MemberId);
             int orderId = Convert.ToInt32(MysqlRepository.ExecuteScalar(MysqlRepository.ConnectionString_Writable, sql, null));
@@ -24,7 +24,7 @@ namespace RepositoryLayer
             return orderId;
         }
 
-        public static List<int> GetOrderIds(int memberId)
+        public List<int> GetOrderIds(int memberId)
         {
             var list = new List<int>();
             string sql = string.Format(@"SELECT OrderId FROM orders WHERE MemberId = {0}", memberId);
