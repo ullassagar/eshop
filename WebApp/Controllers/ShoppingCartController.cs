@@ -20,21 +20,24 @@ namespace WebApp.Controllers
         public ActionResult Add(int productId = 0, int productCount = 0)
         {
             var cart = GetCart();
-            CartHandler.AddProduct(productId, productCount, cart);
+            var cartHandler = new CartHandler();
+            cartHandler.AddProduct(productId, productCount, cart);
             return Json(new { Success = true }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult ChangeProductCount(int productId = 0, int productCount = 0)
         {
             var cart = GetCart();
-            CartHandler.ChangeProductCount(productId, productCount, cart);
+            var cartHandler = new CartHandler(); 
+            cartHandler.ChangeProductCount(productId, productCount, cart);
             return Json(new { Success = true }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult RemoveProduct(int productId = 0)
         {
             var cart = GetCart();
-            CartHandler.ChangeProductCount(productId, 0, cart);
+            var cartHandler = new CartHandler(); 
+            cartHandler.ChangeProductCount(productId, 0, cart);
             return Json(new { Success = true }, JsonRequestBehavior.AllowGet);
         }
 
@@ -56,7 +59,8 @@ namespace WebApp.Controllers
             OrderHandler.AddOrder(cart);
 
             Session[Constants.CartKeyName] = new Cart();
-            CartHandler.SaveCart(cart);
+            var cartHandler = new CartHandler(); 
+            cartHandler.SaveCart(cart);
 
             return View("Confirm");
         }
@@ -66,7 +70,8 @@ namespace WebApp.Controllers
             var member = PublicUser.GetCurrentUser();
             if (member != null && member.MemberId > 0)
             {
-                return CartHandler.GetCart(member.MemberId);
+                var cartHandler = new CartHandler();
+                return cartHandler.GetCart(member.MemberId);
             }
             else
             {

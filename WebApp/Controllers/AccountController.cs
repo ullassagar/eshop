@@ -11,7 +11,8 @@ namespace WebApp.Controllers
         public ActionResult Index()
         {
             var user = (PublicUser)Session[Constants.AppUserKeyName];
-            var member = MemberHandler.GetMember(user.MemberId);
+            var memberHandler = new MemberHandler();
+            var member = memberHandler.GetMember(user.MemberId);
             var memberModel = MemberModeMapper.Map(member);
             return View(memberModel);
         }
@@ -20,7 +21,8 @@ namespace WebApp.Controllers
         public ViewResult Edit()
         {
             var user = (PublicUser)Session[Constants.AppUserKeyName];
-            var member = MemberHandler.GetMember(user.MemberId);
+            var memberHandler = new MemberHandler();
+            var member = memberHandler.GetMember(user.MemberId);
             var memberModel = MemberModeMapper.Map(member);
             return View(memberModel);
         }
@@ -30,7 +32,8 @@ namespace WebApp.Controllers
         public ActionResult Edit(MemberModel model)
         {
             var member = MemberModeMapper.Map(model);
-            MemberHandler.Update(member);
+            var memberHandler = new MemberHandler();
+            memberHandler.Update(member);
             return RedirectToAction("Index");
         }
 
@@ -42,12 +45,14 @@ namespace WebApp.Controllers
         [HttpPost]
         public ActionResult Login(MemberModel model)
         {
-            var member = MemberHandler.GetMember(model.EmailAddress, model.Password);
+            var memberHandler = new MemberHandler();
+            var member = memberHandler.GetMember(model.EmailAddress, model.Password);
             if (member != null)
             {
                 Session[Constants.AppUserKeyName] = PublicUser.GetCurrentUser(member);
 
-                var mongoCart = CartHandler.GetCart(member.MemberId);
+                var cartHandler = new CartHandler();
+                var mongoCart = cartHandler.GetCart(member.MemberId);
                 var sessionCart = (Cart)Session[Constants.CartKeyName];
 
                 if (sessionCart != null && sessionCart.CartItems != null && sessionCart.CartItems.Count > 0)
@@ -73,7 +78,7 @@ namespace WebApp.Controllers
                     }
                 }
 
-                CartHandler.SaveCart(mongoCart);
+                cartHandler.SaveCart(mongoCart);
 
                 return RedirectToAction("Index", "Home", new { area = "" });
             }
@@ -86,7 +91,8 @@ namespace WebApp.Controllers
         public ActionResult Register(MemberModel model)
         {
             var member = MemberModeMapper.Map(model);
-            var error = MemberHandler.AddMember(member);
+            var memberHandler = new MemberHandler();
+            var error = memberHandler.AddMember(member);
 
             if (error == ErrorCode.ErrorWhileMemberRegistrationEmailEmpty)
             {

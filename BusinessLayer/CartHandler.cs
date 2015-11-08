@@ -6,17 +6,24 @@ namespace BusinessLayer
 {
     public class CartHandler
     {
-        public static Cart GetCart(int memberId)
+        private readonly ICartRepository _cartRepository;
+
+        public CartHandler()
         {
-            return CartRepository.GetCart(memberId);
+            _cartRepository = new CartRepository();
         }
 
-        public static void SaveCart(Cart cart)
+        public Cart GetCart(int memberId)
         {
-            CartRepository.SaveCart(cart);
+            return _cartRepository.GetCart(memberId);
         }
 
-        public static void AddProduct(int productId, int productCount, Cart cart)
+        public void SaveCart(Cart cart)
+        {
+            _cartRepository.SaveCart(cart);
+        }
+
+        public void AddProduct(int productId, int productCount, Cart cart)
         {
             var product = ProductHandler.GetProduct(productId);
             if (product != null)
@@ -41,7 +48,7 @@ namespace BusinessLayer
             }
         }
 
-        public static void ChangeProductCount(int productId, int productCount, Cart cart)
+        public void ChangeProductCount(int productId, int productCount, Cart cart)
         {
             var product = ProductHandler.GetProduct(productId);
             if (product != null)
@@ -65,7 +72,7 @@ namespace BusinessLayer
             }
         }
 
-        private static CartItem CartItem(Product product, int productCount)
+        private CartItem CartItem(Product product, int productCount)
         {
             var newItem = new CartItem
             {
@@ -74,7 +81,7 @@ namespace BusinessLayer
                 ProductName = product.ProductName,
                 ImageUrl = product.ImageUrl,
                 PriceOut = product.Price,
-                Cbm=product.Cbm
+                Cbm = product.Cbm
             };
             return newItem;
         }

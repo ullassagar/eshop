@@ -5,31 +5,37 @@ namespace BusinessLayer
 {
     public class MemberHandler
     {
-        public static Member GetMember(int MemberId)
+        private readonly MemberRepository _memberRepository = null;
+
+        public MemberHandler()
         {
-            return MemberRepository.GetMember(MemberId);
+            _memberRepository = new MemberRepository();
         }
 
-        public static Member GetMember(string emailAddress, string password)
+        public Member GetMember(int memberId)
         {
-            return MemberRepository.GetMember(emailAddress, password);
+            return _memberRepository.GetMember(memberId);
         }
 
-        public static ErrorCode AddMember(Member member)
+        public Member GetMember(string emailAddress, string password)
+        {
+            return _memberRepository.GetMember(emailAddress, password);
+        }
+
+        public ErrorCode AddMember(Member member)
         {
             if (string.IsNullOrEmpty(member.EmailAddress))
                 return ErrorCode.ErrorWhileMemberRegistrationEmailEmpty;
-            
+
             if (string.IsNullOrEmpty(member.Password))
                 return ErrorCode.ErrorWhileMemberRegistrationPasswordEmpty;
 
-            return MemberRepository.AddMember(member);
+            return _memberRepository.AddMember(member);
         }
 
-        public static void Update(Member member)
+        public void Update(Member member)
         {
-            MemberRepository.Update(member);
-
+            _memberRepository.Update(member);
         }
 
     }

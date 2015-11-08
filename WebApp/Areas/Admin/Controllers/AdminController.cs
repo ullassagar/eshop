@@ -1,7 +1,6 @@
 ﻿using System.Web.Mvc;
 using BusinessLayer;
 using DataLayer;
-using WebApp.Models;
 using WebApp.Areas.Admin.Models;
 
 namespace WebApp.Areas.Admin.Controllers
@@ -10,46 +9,48 @@ namespace WebApp.Areas.Admin.Controllers
     {
         public ActionResult Index()
         {
-            var user = (AdminUser)Session[Constants.AdminUserKeyName];
+            var user = (AdminUser) Session[Constants.AdminUserKeyName];
             if (user == null)
             {
-                return RedirectToAction("Login", "Admin", new { area = "Admin" });
+                return RedirectToAction("Login", "Admin", new {area = "Admin"});
             }
-            return RedirectToAction("Index", "Products", new { area = "Admin" });
+            return RedirectToAction("Index", "Products", new {area = "Admin"});
         }
 
-        [AuthorizeAdminAttribute]
+        [AuthorizeAdmin]
         public ActionResult ViewProfile()
         {
-            var user = (AdminUser)Session[Constants.AdminUserKeyName];
+            var user = (AdminUser) Session[Constants.AdminUserKeyName];
             if (user == null)
             {
-                return RedirectToAction("Login", "Admin", new { area = "Admin" });
+                return RedirectToAction("Login", "Admin", new {area = "Admin"});
             }
 
-            var admin = AdminHandler.GetUser(user.UserId);
-            var userModel = AdminModelMapper.Map(admin);
+            var adminHandler = new AdminHandler();
+            User admin = adminHandler.GetUser(user.UserId);
+            AdminModel userModel = AdminModelMapper.Map(admin);
             return View("ViewProfile", userModel);
         }
 
-        [AuthorizeAdminAttribute]
+        [AuthorizeAdmin]
         public ViewResult Edit()
         {
-            var user = (AdminUser)Session[Constants.AdminUserKeyName];
-            var profile = AdminHandler.GetUser(user.UserId);
-            var profileModel = AdminModelMapper.Map(profile);
+            var user = (AdminUser) Session[Constants.AdminUserKeyName];
+            var adminHandler = new AdminHandler();
+            User profile = adminHandler.GetUser(user.UserId);
+            AdminModel profileModel = AdminModelMapper.Map(profile);
             return View(profileModel);
         }
 
         [HttpPost]
-        [AuthorizeAdminAttribute]
+        [AuthorizeAdmin]
         public ActionResult Edit(AdminModel model)
         {
-            var user = AdminModelMapper.Map(model);
-            AdminHandler.Update(user);
+            User user = AdminModelMapper.Map(model);
+            var adminHandler = new AdminHandler();
+            adminHandler.Update(user);
             return RedirectToAction("Index");
         }
-
 
         public ActionResult Login()
         {
@@ -59,13 +60,13 @@ namespace WebApp.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Login(AdminModel model)
         {
-            var user = AdminHandler.GetUser(model.EmailId, model.Password);
+            var adminHandler = new AdminHandler();
+            User user = adminHandler.GetUser(model.EmailId, model.Password);
             if (user != null)
             {
                 Session[Constants.AdminUserKeyName] = AdminUser.GetCurrentUser(user);
-                return RedirectToAction("Index", "Products", new { area = "Admin" });
+                return RedirectToAction("Index", "Products", new {area = "Admin"});
             }
-
             ViewBag.Message = "No Access!! Invalid User for this module";
             return View();
         }
@@ -75,7 +76,7 @@ namespace WebApp.Areas.Admin.Controllers
             Session.Abandon();
             Session.Clear();
             Session[Constants.AdminUserKeyName] = null;
-            return RedirectToAction("Login", "Admin", new { area = "Admin" });
+            return RedirectToAction("Login", "Admin", new {area = "Admin"});
         }
     }
 }

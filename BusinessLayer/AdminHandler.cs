@@ -3,22 +3,28 @@ using RepositoryLayer;
 
 namespace BusinessLayer
 {
-   public class AdminHandler
+    public class AdminHandler
     {
-       public static User GetUser(int UserId)
-       {
-           return AdminRepository.GetUser(UserId);
-       }
+        private readonly IAdminRepository _adminRepository;
 
-       public static User GetUser(string emailAddress, string password)
-       {
-           return AdminRepository.GetUser(emailAddress, password);
-       }
+        public AdminHandler()
+        {
+            _adminRepository = new AdminRepository();
+        }
 
-       public static void Update(User user)
-       {
-           AdminRepository.Update(user);
+        public User GetUser(int userId)
+        {
+            return _adminRepository.GetUser(userId);
+        }
 
-       }
+        public User GetUser(string emailAddress, string password)
+        {
+            return _adminRepository.GetUser(emailAddress, password);
+        }
+
+        public void Update(User user)
+        {
+            _adminRepository.Update(user);
+        }
     }
 }

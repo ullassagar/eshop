@@ -1,10 +1,8 @@
 ﻿using DataLayer;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RepositoryLayer
 {
@@ -12,13 +10,11 @@ namespace RepositoryLayer
     {
         public static int AddOrder(Cart cart)
         {
-            var sql = string.Format(@"INSERT INTO orders(MemberId) VALUES({0});select last_insert_id();", cart.MemberId);
-
-            var orderId = Convert.ToInt32(MysqlRepository.ExecuteScalar(MysqlRepository.ConnectionString_Writable, sql, null));
-
+            string sql = string.Format(@"INSERT INTO orders(MemberId) VALUES({0});select last_insert_id();", cart.MemberId);
+            int orderId = Convert.ToInt32(MysqlRepository.ExecuteScalar(MysqlRepository.ConnectionString_Writable, sql, null));
             if (orderId > 0 && cart.CartItems != null)
             {
-                foreach (var item in cart.CartItems)
+                foreach (CartItem item in cart.CartItems)
                 {
                     sql = string.Format(@"INSERT INTO orderdetails(OrderId, ProductId, ProductCount) 
                                           VALUES({0},{1},{2})", orderId, item.ProductId, item.ProductCount);
@@ -28,12 +24,11 @@ namespace RepositoryLayer
             return orderId;
         }
 
-
         public static List<int> GetOrderIds(int memberId)
         {
             var list = new List<int>();
-            var sql = string.Format(@"SELECT OrderId FROM orders WHERE MemberId = {0}", memberId);
-            var reader = MysqlRepository.ExecuteReader(MysqlRepository.ConnectionString_ReadOnly, CommandType.Text, sql);
+            string sql = string.Format(@"SELECT OrderId FROM orders WHERE MemberId = {0}", memberId);
+            MySqlDataReader reader = MysqlRepository.ExecuteReader(MysqlRepository.ConnectionString_ReadOnly, CommandType.Text, sql);
             while (reader.Read())
             {
                 list.Add(Convert.ToInt32(reader["orderid"]));
