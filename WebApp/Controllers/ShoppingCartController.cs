@@ -9,8 +9,9 @@ namespace WebApp.Controllers
     //[AuthorizeUser]
     public class ShoppingCartController : Controller
     {
-        //
-        // GET: /CartItems/
+        public CartHandler CartHandler { get; set; }
+        public OrderHandler OrderHandler { get; set; }
+
         public ActionResult Index()
         {
             var model = GetCartModel();
@@ -20,24 +21,21 @@ namespace WebApp.Controllers
         public ActionResult Add(int productId = 0, int productCount = 0)
         {
             var cart = GetCart();
-            var cartHandler = new CartHandler();
-            cartHandler.AddProduct(productId, productCount, cart);
+            CartHandler.AddProduct(productId, productCount, cart);
             return Json(new { Success = true }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult ChangeProductCount(int productId = 0, int productCount = 0)
         {
             var cart = GetCart();
-            var cartHandler = new CartHandler(); 
-            cartHandler.ChangeProductCount(productId, productCount, cart);
+            CartHandler.ChangeProductCount(productId, productCount, cart);
             return Json(new { Success = true }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult RemoveProduct(int productId = 0)
         {
             var cart = GetCart();
-            var cartHandler = new CartHandler(); 
-            cartHandler.ChangeProductCount(productId, 0, cart);
+            CartHandler.ChangeProductCount(productId, 0, cart);
             return Json(new { Success = true }, JsonRequestBehavior.AllowGet);
         }
 
@@ -56,12 +54,11 @@ namespace WebApp.Controllers
         public ActionResult Confirm()
         {
             var cart = GetCart();
-            var orderHandler = new OrderHandler();
-            orderHandler.AddOrder(cart);
+            OrderHandler.AddOrder(cart);
 
             Session[Constants.CartKeyName] = new Cart();
-            var cartHandler = new CartHandler(); 
-            cartHandler.SaveCart(cart);
+
+            CartHandler.SaveCart(cart);
 
             return View("Confirm");
         }
@@ -71,8 +68,7 @@ namespace WebApp.Controllers
             var member = PublicUser.GetCurrentUser();
             if (member != null && member.MemberId > 0)
             {
-                var cartHandler = new CartHandler();
-                return cartHandler.GetCart(member.MemberId);
+                return CartHandler.GetCart(member.MemberId);
             }
             else
             {

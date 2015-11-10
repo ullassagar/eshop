@@ -7,10 +7,12 @@ namespace BusinessLayer
     public class CartHandler
     {
         private readonly ICartRepository _cartRepository;
+        private readonly ProductHandler _productHandler;
 
-        public CartHandler()
+        public CartHandler(ICartRepository cartRepository, ProductHandler productHandler)
         {
-            _cartRepository = new CartRepository();
+            _cartRepository = cartRepository;
+            _productHandler = productHandler;
         }
 
         public Cart GetCart(int memberId)
@@ -25,8 +27,7 @@ namespace BusinessLayer
 
         public void AddProduct(int productId, int productCount, Cart cart)
         {
-            var productHandler = new ProductHandler();
-            var product = productHandler.GetProduct(productId);
+            var product = _productHandler.GetProduct(productId);
             if (product != null)
             {
                 if (cart.CartItems == null)
@@ -51,8 +52,7 @@ namespace BusinessLayer
 
         public void ChangeProductCount(int productId, int productCount, Cart cart)
         {
-            var productHandler = new ProductHandler();
-            var product = productHandler.GetProduct(productId);
+            var product = _productHandler.GetProduct(productId);
             if (product != null)
             {
                 if (cart.CartItems == null)

@@ -8,9 +8,9 @@ namespace BusinessLayer
     {
         private readonly IProductRepository _productRepository;
 
-        public ProductHandler()
+        public ProductHandler(IProductRepository productRepository)
         {
-            _productRepository = new ProductRepository();
+            _productRepository = productRepository;
         }
 
         public List<Product> GetList()

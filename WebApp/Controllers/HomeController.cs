@@ -7,11 +7,12 @@ namespace WebApp.Controllers
     //[AuthorizeUser]
     public class HomeController : Controller
     {
+        public ProductHandler ProductHandler { get; set; }
+
         public ActionResult Index()
         {
             var model = new HomeModel();
-            var productHandler = new ProductHandler();
-            var products = productHandler.GetList();
+            var products = ProductHandler.GetList();
 
             foreach(var product in products)
             {

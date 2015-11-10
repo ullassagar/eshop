@@ -8,9 +8,9 @@ namespace BusinessLayer
     {
         private readonly IOrdersRepository _ordersRepository;
 
-        public OrderHandler()
+        public OrderHandler(IOrdersRepository ordersRepository)
         {
-            _ordersRepository = new OrdersRepository();
+            _ordersRepository = ordersRepository;
         }
 
         public int AddOrder(Cart cart)

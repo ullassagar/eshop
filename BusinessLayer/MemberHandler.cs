@@ -7,9 +7,9 @@ namespace BusinessLayer
     {
         private readonly IMemberRepository _memberRepository = null;
 
-        public MemberHandler()
+        public MemberHandler(IMemberRepository memberRepository)
         {
-            _memberRepository = new MemberRepository();
+            _memberRepository = memberRepository;
         }
 
         public Member GetMember(int memberId)

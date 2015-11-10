@@ -7,6 +7,8 @@ namespace WebApp.Areas.Admin.Controllers
 {
     public class AdminController : Controller
     {
+        public AdminHandler AdminHandler { get; set; }
+
         public ActionResult Index()
         {
             var user = (AdminUser) Session[Constants.AdminUserKeyName];
@@ -25,9 +27,7 @@ namespace WebApp.Areas.Admin.Controllers
             {
                 return RedirectToAction("Login", "Admin", new {area = "Admin"});
             }
-
-            var adminHandler = new AdminHandler();
-            User admin = adminHandler.GetUser(user.UserId);
+            User admin = AdminHandler.GetUser(user.UserId);
             AdminModel userModel = AdminModelMapper.Map(admin);
             return View("ViewProfile", userModel);
         }
@@ -36,8 +36,7 @@ namespace WebApp.Areas.Admin.Controllers
         public ViewResult Edit()
         {
             var user = (AdminUser) Session[Constants.AdminUserKeyName];
-            var adminHandler = new AdminHandler();
-            User profile = adminHandler.GetUser(user.UserId);
+            User profile = AdminHandler.GetUser(user.UserId);
             AdminModel profileModel = AdminModelMapper.Map(profile);
             return View(profileModel);
         }
@@ -47,8 +46,7 @@ namespace WebApp.Areas.Admin.Controllers
         public ActionResult Edit(AdminModel model)
         {
             User user = AdminModelMapper.Map(model);
-            var adminHandler = new AdminHandler();
-            adminHandler.Update(user);
+            AdminHandler.Update(user);
             return RedirectToAction("Index");
         }
 
@@ -60,8 +58,7 @@ namespace WebApp.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Login(AdminModel model)
         {
-            var adminHandler = new AdminHandler();
-            User user = adminHandler.GetUser(model.EmailId, model.Password);
+            User user = AdminHandler.GetUser(model.EmailId, model.Password);
             if (user != null)
             {
                 Session[Constants.AdminUserKeyName] = AdminUser.GetCurrentUser(user);

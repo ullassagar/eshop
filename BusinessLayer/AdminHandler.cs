@@ -7,9 +7,9 @@ namespace BusinessLayer
     {
         private readonly IAdminRepository _adminRepository;
 
-        public AdminHandler()
+        public AdminHandler(IAdminRepository adminRepository)
         {
-            _adminRepository = new AdminRepository();
+            _adminRepository = adminRepository;
         }
 
         public User GetUser(int userId)

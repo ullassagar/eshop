@@ -1,26 +1,27 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Web;
 using System.Web.Mvc;
 using BusinessLayer;
+using DataLayer;
 using WebApp.Areas.Admin.Models;
 
 namespace WebApp.Areas.Admin.Controllers
 {
     public class ProductsController : Controller
     {
+        public ProductHandler ProductHandler { get; set; }
+
         public ActionResult Index()
         {
             var model = new ProductsModel();
-            var productHandler = new ProductHandler();
-            var proList = productHandler.GetList();
-
-            foreach (var pro in proList)
+            List<Product> proList = ProductHandler.GetList();
+            foreach (Product pro in proList)
             {
-                var proModel = ProductModelMapper.MapToProductModel(pro);
+                ProductsModel proModel = ProductModelMapper.MapToProductModel(pro);
                 model.ProductList.Add(proModel);
             }
-
             return View(model);
         }
 
@@ -33,38 +34,30 @@ namespace WebApp.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Add(ProductsModel model, HttpPostedFileBase file)
         {
-            var product = ProductModelMapper.MapToProduct(model);
-
+            Product product = ProductModelMapper.MapToProduct(model);
             try
             {
-                var productHandler = new ProductHandler();
-                productHandler.Add(product);
-
+                ProductHandler.Add(product);
                 product.ImageUrl = product.ProductId + ".png";
                 if (file != null && file.ContentLength > 0)
                 {
-                    var path = Path.Combine(Server.MapPath("~/Images/Products"), product.ImageUrl);
+                    string path = Path.Combine(Server.MapPath("~/Images/Products"), product.ImageUrl);
                     file.SaveAs(path);
                 }
-      
-                productHandler.Update(product);
+                ProductHandler.Update(product);
             }
             catch (Exception ex)
             {
                 model.Error = ex.Message;
                 return View("Add", model);
             }
-
             return RedirectToAction("Index");
         }
 
         public ActionResult Edit(int id = 0)
         {
-            var productHandler = new ProductHandler();
-            var product = productHandler.GetProduct(id);
-
-            var proModel = ProductModelMapper.MapToProductModel(product);
-
+            Product product = ProductHandler.GetProduct(id);
+            ProductsModel proModel = ProductModelMapper.MapToProductModel(product);
             return View(proModel);
         }
 
@@ -75,29 +68,24 @@ namespace WebApp.Areas.Admin.Controllers
             {
                 if (file != null && file.ContentLength > 0)
                 {
-                    var path = Path.Combine(Server.MapPath("~/Images/Products"), model.ImageUrl);
+                    string path = Path.Combine(Server.MapPath("~/Images/Products"), model.ImageUrl);
                     file.SaveAs(path);
                 }
-
-                var product = ProductModelMapper.MapToProduct(model);
-                var productHandler = new ProductHandler();
-                productHandler.Update(product);
+                Product product = ProductModelMapper.MapToProduct(model);
+                ProductHandler.Update(product);
             }
             catch (Exception ex)
             {
                 model.Error = ex.Message;
                 return View("Edit", model);
             }
-
             return RedirectToAction("Index");
         }
 
         public ActionResult Delete(int id = 0)
         {
-            var productHandler = new ProductHandler();
-            productHandler.Delete(id);
+            ProductHandler.Delete(id);
             return RedirectToAction("Index");
         }
-
     }
 }

@@ -1,9 +1,10 @@
 ﻿@using BusinessLayer
+@using RepositoryLayer
 @model List<int>
 
 @{
     var member = PublicUser.GetCurrentUser();
-    var orderHandler = new OrderHandler();
+    var orderHandler = new OrderHandler(new OrdersRepository());
     var list = orderHandler.GetOrderIds(member.MemberId);
     Layout = "~/Views/Shared/_LayoutLoggedIn.cshtml";
 }
