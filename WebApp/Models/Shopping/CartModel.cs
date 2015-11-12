@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 using DataLayer;
 
-namespace WebApp.Models
+namespace WebApp.Models.Shopping
 {
-    public class CartModel
+    public class CartModel : MasterModel
     {
         public int MemberId { get; set; }
         public List<CartItemModel> CartItems { get; set; }
@@ -32,9 +29,9 @@ namespace WebApp.Models
                 model.CartTotalCbm = cart.CartTotalCbm;
                 model.CartTotalPriceOut = cart.CartTotalPriceOut;
 
-                if (cart.CartItems != null)
+                if (cart.Items != null)
                 {
-                    foreach (var cartItem in cart.CartItems)
+                    foreach (var cartItem in cart.Items)
                     {
                         model.CartItems.Add(CartItemModelMapper.Map(cartItem));
                     }

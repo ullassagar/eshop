@@ -2,6 +2,7 @@
 using BusinessLayer;
 using DataLayer;
 using WebApp.Models;
+using WebApp.Models.Products;
 
 namespace WebApp.Controllers
 {
@@ -22,7 +23,7 @@ namespace WebApp.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            ProductModel promodel = ProductModelMapper.MapToProductModel(product);
+            ProductModel promodel = ProductModelMapper.Map(product);
 
             return View(promodel);
         }

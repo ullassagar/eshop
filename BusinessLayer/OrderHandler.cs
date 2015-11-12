@@ -13,9 +13,9 @@ namespace BusinessLayer
             _ordersRepository = ordersRepository;
         }
 
-        public int AddOrder(Cart cart)
+        public int ConfirmOrder(ref Cart cart)
         {
-            return _ordersRepository.AddOrder(cart);
+            return _ordersRepository.ConfirmOrder(ref cart);
         }
 
         public List<int> GetOrderIds(int memberId)

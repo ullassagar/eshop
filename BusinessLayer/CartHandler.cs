@@ -30,12 +30,12 @@ namespace BusinessLayer
             var product = _productHandler.GetProduct(productId);
             if (product != null)
             {
-                if (cart.CartItems == null)
+                if (cart.Items == null)
                 {
-                    cart.CartItems = new List<CartItem>();
+                    cart.Items = new List<CartItem>();
                 }
 
-                var item = cart.CartItems.Find(p => p.ProductId == productId);
+                var item = cart.Items.Find(p => p.ProductId == productId);
                 if (item != null)
                 {
                     item.ProductCount += productCount;
@@ -43,7 +43,7 @@ namespace BusinessLayer
                 else
                 {
                     var newItem = CartItem(product, productCount);
-                    cart.CartItems.Add(newItem);
+                    cart.Items.Add(newItem);
                 }
 
                 SaveCart(cart);
@@ -55,18 +55,18 @@ namespace BusinessLayer
             var product = _productHandler.GetProduct(productId);
             if (product != null)
             {
-                if (cart.CartItems == null)
+                if (cart.Items == null)
                 {
-                    cart.CartItems = new List<CartItem>();
+                    cart.Items = new List<CartItem>();
                 }
 
-                var item = cart.CartItems.Find(p => p.ProductId == productId);
+                var item = cart.Items.Find(p => p.ProductId == productId);
                 if (item != null)
                 {
                     item.ProductCount = productCount;
                     if (productCount == 0)
                     {
-                        cart.CartItems.Remove(item);
+                        cart.Items.Remove(item);
                     }
                 }
 

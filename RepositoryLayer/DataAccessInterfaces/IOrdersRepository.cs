@@ -5,7 +5,7 @@ namespace RepositoryLayer
 {
     public interface IOrdersRepository
     {
-        int AddOrder(Cart cart);
+        int ConfirmOrder(ref Cart cart);
         List<int> GetOrderIds(int memberId);
     }
 }

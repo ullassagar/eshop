@@ -13,7 +13,7 @@ namespace DataLayer
        public int OrderId { get; set; }
        public int MemberId { get; set; }
 
-       public List<OrderDetail> OrderItems { get; set; }
+       public List<OrderItem> OrderItems { get; set; }
 
        public static Order Load(IDataReader reader)
        {

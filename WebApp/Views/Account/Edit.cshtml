@@ -1,5 +1,4 @@
-﻿@using WebApp
-@model WebApp.Models.MemberModel
+﻿@model WebApp.Models.Customers.MemberModel
 
 @{
     Layout = "~/Views/Shared/_LayoutLoggedIn.cshtml";
@@ -17,22 +16,23 @@
 
                 <div class="row">
                     <div class="col-md-2">@Html.Label("Name")</div>
-                    <div class="col-md-3">@Html.TextBoxFor(u => u.MemberName, new { @class = "form-control" })</div>
+                    <div class="col-md-3">@Html.TextBoxFor(u => u.MemberName, new {@class = "form-control"})</div>
                     <div class="col-md-3">@Html.ValidationMessageFor(u => u.MemberName)</div>
                 </div>
                 <div class="mt10 row">
                     <div class="col-md-2">@Html.Label("Email")</div>
-                    <div class="col-md-3">@Html.TextBoxFor(u => u.EmailAddress, new { Class = "form-control" })</div>
+                    <div class="col-md-3">@Html.TextBoxFor(u => u.EmailAddress, new {Class = "form-control"})</div>
                     <div class="col-md-3">@Html.ValidationMessageFor(u => u.EmailAddress)</div>
                 </div>
-                 <div class="mt10 row">
+                <div class="mt10 row">
                     <div class="col-md-2">@Html.Label("Password")</div>
-                    <div class="col-md-3">@Html.PasswordFor(u => u.Password, new { Class = "form-control" })</div>
+                    <div class="col-md-3">@Html.PasswordFor(u => u.Password, new {Class = "form-control"})</div>
                     <div class="col-md-3">@Html.ValidationMessageFor(u => u.Password)</div>
-                </div><br />
-                <input type="submit" value="Save" class="mt10 btn btn-primary" /><span>&nbsp;&nbsp;</span>
-                @Html.ActionLink("Back", "Index", null, new { @class = "mt10 btn btn-primary" })
-
+                </div>
+                <br />
+                <input type="submit" value="Save" class="mt10 btn btn-primary" />
+                <span>&nbsp;&nbsp;</span>
+                @Html.ActionLink("Back", "Index", null, new {@class = "mt10 btn btn-primary"})
             }<br /><br />
         </div>
     </div>

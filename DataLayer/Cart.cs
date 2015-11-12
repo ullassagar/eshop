@@ -8,16 +8,16 @@ namespace DataLayer
     public class Cart : Entity
     {
         public int MemberId { get; set; }
-        public List<CartItem> CartItems { get; set; }
+        public List<CartItem> Items { get; set; }
 
         public int CartProductCount
         {
             get
             {
                 int total = 0;
-                if (CartItems != null)
+                if (Items != null)
                 {
-                    total += CartItems.Sum(cartItem => cartItem.ProductCount);
+                    total += Items.Sum(cartItem => cartItem.ProductCount);
                 }
                 return total;
             }
@@ -28,9 +28,9 @@ namespace DataLayer
             get
             {
                 decimal total = 0;
-                if (CartItems != null)
+                if (Items != null)
                 {
-                    total += CartItems.Sum(cartItem => cartItem.TotalCbm);
+                    total += Items.Sum(cartItem => cartItem.TotalCbm);
                 }
                 return Math.Round(total, 2);
             }
@@ -41,9 +41,9 @@ namespace DataLayer
             get
             {
                 decimal total = 0;
-                if (CartItems != null)
+                if (Items != null)
                 {
-                    total += CartItems.Sum(cartItem => cartItem.TotalPriceOut);
+                    total += Items.Sum(cartItem => cartItem.TotalPriceOut);
                 }
                 return Math.Round(total, 2);
             }
@@ -51,7 +51,7 @@ namespace DataLayer
 
         public Cart()
         {
-            CartItems = new List<CartItem>();
+            Items = new List<CartItem>();
         }
     }
 }

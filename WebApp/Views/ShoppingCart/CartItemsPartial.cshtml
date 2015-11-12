@@ -1,4 +1,4 @@
-﻿@model  WebApp.Models.CartModel
+﻿@model  WebApp.Models.Shopping.CartModel
 <div class="row text-primary">
     <div class="col-md-2">
         Product
@@ -69,10 +69,15 @@
     <div class="col-md-2 text-right">Total Price:</div>
     <div class="col-md-2">@Html.DisplayFor(model => model.CartTotalPriceOut) kr</div>
 </div>
-<div class="row right">
-    @using (Html.BeginForm("Confirm", "ShoppingCart", FormMethod.Post))
-    {
-        <input type="submit" value="Confirm" class="mt10 btn btn-primary" />
-        <span>@ViewBag.message </span><br />
-    }
-</div>
+
+@if (!string.IsNullOrEmpty(Model.LoggedInMemberName))
+{
+    <div class="row right">
+        @using (Html.BeginForm("Confirm", "ShoppingCart", FormMethod.Post))
+        {
+            <input type="submit" value="Confirm" class="mt10 btn btn-primary" />
+            <span>@ViewBag.message </span>
+            <br />
+        }
+    </div>
+}

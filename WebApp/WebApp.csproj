@@ -195,14 +195,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\MemberModel.cs" />
-    <Compile Include="Models\CartItemModel.cs" />
-    <Compile Include="Models\CartModel.cs" />
+    <Compile Include="Models\Customers\MemberModel.cs" />
+    <Compile Include="Models\Products\ProductModel.cs" />
+    <Compile Include="Models\Shopping\CartItemModel.cs" />
+    <Compile Include="Models\Shopping\CartModel.cs" />
     <Compile Include="Models\MasterModel.cs" />
     <Compile Include="Models\HomeModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\OrderDetailModel.cs" />
-    <Compile Include="Models\OrdersModel.cs" />
+    <Compile Include="Models\Shopping\OrderItemModel.cs" />
+    <Compile Include="Models\Shopping\OrderModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

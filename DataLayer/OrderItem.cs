@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataLayer
 {
-   public class OrderDetail
+   public class OrderItem
     {
        public int ProductId { get; set; }
        public int ProductCount { get; set; }

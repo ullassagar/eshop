@@ -1,19 +1,18 @@
 ﻿using DataLayer;
 
-
-namespace WebApp.Models
+namespace WebApp.Models.Shopping
 {
-    public class OrderDetailModel
+    public class OrderItemModel
     {
         public int ProductId { get; set; }
         public int ProductCount { get; set; }
     }
 
-    public static class OrderDetailModelMapper
+    public static class OrderItemModelMapper
     {
-        public static OrderDetailModel Map(OrderDetail item)
+        public static OrderItemModel Map(OrderItem item)
         {
-            var model = new OrderDetailModel();
+            var model = new OrderItemModel();
             if (item != null)
             {
                 model.ProductId = item.ProductId;

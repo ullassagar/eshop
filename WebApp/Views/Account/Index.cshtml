@@ -1,5 +1,4 @@
-﻿@using WebApp
-@model WebApp.Models.MemberModel
+﻿@model WebApp.Models.Customers.MemberModel
 
 @{
     Layout = "~/Views/Shared/_LayoutLoggedIn.cshtml";
@@ -15,14 +14,14 @@
 
             <div class="row">
                 <div class="col-md-2">@Html.Label("Name")</div>
-                <div class="col-md-2">@Html.DisplayFor(u => u.MemberName, new { @class = "form-control" })</div>
+                <div class="col-md-2">@Html.DisplayFor(u => u.MemberName, new {@class = "form-control"})</div>
             </div>
             <div class="mt10 row">
                 <div class="col-md-2">@Html.Label("Email")</div>
-                <div class="col-md-3">@Html.DisplayFor(u => u.EmailAddress, new { Class = "form-control" })</div>
+                <div class="col-md-3">@Html.DisplayFor(u => u.EmailAddress, new {Class = "form-control"})</div>
 
             </div>
-            @Html.ActionLink("Edit", "Edit", null, new { @class = "mt10 btn btn-primary" })
+            @Html.ActionLink("Edit", "Edit", null, new {@class = "mt10 btn btn-primary"})
             <br /><br />
         </div>
     </div>

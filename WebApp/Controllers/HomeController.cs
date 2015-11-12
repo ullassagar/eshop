@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using BusinessLayer;
 using WebApp.Models;
+using WebApp.Models.Products;
 
 namespace WebApp.Controllers
 {
@@ -16,8 +17,8 @@ namespace WebApp.Controllers
 
             foreach(var product in products)
             {
-                var productModel = ProductModelMapper.MapToProductModel(product);
-                model.ProductList.Add(productModel);
+                var productModel = ProductModelMapper.Map(product);
+                model.Products.Add(productModel);
             }
 
             return View(model);

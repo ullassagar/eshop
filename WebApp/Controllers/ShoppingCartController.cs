@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using BusinessLayer;
 using DataLayer;
-using WebApp.Models;
+using WebApp.Models.Shopping;
 
 namespace WebApp.Controllers
 {
@@ -14,50 +13,47 @@ namespace WebApp.Controllers
 
         public ActionResult Index()
         {
-            var model = GetCartModel();
+            CartModel model = GetCartModel();
             return View(model);
         }
 
         public ActionResult Add(int productId = 0, int productCount = 0)
         {
-            var cart = GetCart();
+            Cart cart = GetCart();
             CartHandler.AddProduct(productId, productCount, cart);
-            return Json(new { Success = true }, JsonRequestBehavior.AllowGet);
+            return Json(new {Success = true}, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult ChangeProductCount(int productId = 0, int productCount = 0)
         {
-            var cart = GetCart();
+            Cart cart = GetCart();
             CartHandler.ChangeProductCount(productId, productCount, cart);
-            return Json(new { Success = true }, JsonRequestBehavior.AllowGet);
+            return Json(new {Success = true}, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult RemoveProduct(int productId = 0)
         {
-            var cart = GetCart();
+            Cart cart = GetCart();
             CartHandler.ChangeProductCount(productId, 0, cart);
-            return Json(new { Success = true }, JsonRequestBehavior.AllowGet);
+            return Json(new {Success = true}, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult MiniShoppingCart()
         {
-            var model = GetCartModel();
+            CartModel model = GetCartModel();
             return PartialView("MiniShoppingCart", model);
         }
 
         public ActionResult RefreshShoppingCart()
         {
-            var model = GetCartModel();
+            CartModel model = GetCartModel();
             return PartialView("CartItemsPartial", model);
         }
 
         public ActionResult Confirm()
         {
-            var cart = GetCart();
-            OrderHandler.AddOrder(cart);
-
-            Session[Constants.CartKeyName] = new Cart();
-
+            Cart cart = GetCart();
+            OrderHandler.ConfirmOrder(ref cart);
             CartHandler.SaveCart(cart);
 
             return View("Confirm");
@@ -65,27 +61,24 @@ namespace WebApp.Controllers
 
         private Cart GetCart()
         {
-            var member = PublicUser.GetCurrentUser();
+            PublicUser member = PublicUser.GetCurrentUser();
             if (member != null && member.MemberId > 0)
             {
                 return CartHandler.GetCart(member.MemberId);
             }
-            else
+            var cart = (Cart) Session[Constants.CartKeyName];
+            if (cart == null)
             {
-                var cart = (Cart)Session[Constants.CartKeyName];
-                if (cart == null)
-                {
-                    cart = new Cart();
-                    Session[Constants.CartKeyName] = cart;
-                }
-                return cart;
+                cart = new Cart();
+                Session[Constants.CartKeyName] = cart;
             }
+            return cart;
         }
 
         private CartModel GetCartModel()
         {
-            var cart = GetCart();
-            var model = CartModelMapper.Map(cart);
+            Cart cart = GetCart();
+            CartModel model = CartModelMapper.Map(cart);
             return model;
         }
     }

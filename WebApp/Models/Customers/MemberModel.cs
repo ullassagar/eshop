@@ -1,13 +1,9 @@
-﻿using DataLayer;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
+using DataLayer;
 
-namespace WebApp.Models
+namespace WebApp.Models.Customers
 {
-    public class MemberModel :MasterModel
+    public class MemberModel : MasterModel
     {
         public int MemberId { get; set; }
 
@@ -47,16 +43,13 @@ namespace WebApp.Models
 
         public static Member Map(MemberModel model)
         {
-            var member = new Member();
+            return new Member
             {
-                member.MemberId = model.MemberId;
-                member.MemberName = model.MemberName;
-                member.EmailAddress = model.EmailAddress;
-                member.Password = model.Password;
-            }
-            return member;
+                MemberId = model.MemberId, 
+                MemberName = model.MemberName, 
+                EmailAddress = model.EmailAddress,
+                Password = model.Password
+            };
         }
     }
-
-
 }
