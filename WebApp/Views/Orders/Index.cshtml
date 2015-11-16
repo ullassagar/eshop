@@ -1,18 +1,44 @@
-﻿@using BusinessLayer
-@using RepositoryLayer
-@model List<int>
+﻿@model IEnumerable<WebApp.Models.Shopping.OrderModel>
 
 @{
-    var member = PublicUser.GetCurrentUser();
-    var orderHandler = new OrderHandler(new OrdersRepository());
-    var list = orderHandler.GetOrderIds(member.MemberId);
     Layout = "~/Views/Shared/_LayoutLoggedIn.cshtml";
 }
 
 <div class="container">
     <h4>Orders</h4><br />
-    @foreach (var id in list)
-    {
-        @Html.ActionLink("Show", "Orders", new { orderId = id });
-    }
+    <table class="table">
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Status
+            </th>
+            <th>
+                Order value
+            </th>
+            <th>
+                Confirmed date
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(item.OrderId.ToString(), "OrderDetails", new { id = item.OrderId })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CurrentOrderStatus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderValue)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreationDate)
+                </td>
+            </tr>
+        }
+
+    </table>
 </div>

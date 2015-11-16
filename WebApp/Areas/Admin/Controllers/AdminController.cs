@@ -27,8 +27,8 @@ namespace WebApp.Areas.Admin.Controllers
             {
                 return RedirectToAction("Login", "Admin", new {area = "Admin"});
             }
-            User admin = AdminHandler.GetUser(user.UserId);
-            AdminModel userModel = AdminModelMapper.Map(admin);
+            var admin = AdminHandler.GetUser(user.UserId);
+            var userModel = AdminModelMapper.Map(admin);
             return View("ViewProfile", userModel);
         }
 
@@ -36,8 +36,8 @@ namespace WebApp.Areas.Admin.Controllers
         public ViewResult Edit()
         {
             var user = (AdminUser) Session[Constants.AdminUserKeyName];
-            User profile = AdminHandler.GetUser(user.UserId);
-            AdminModel profileModel = AdminModelMapper.Map(profile);
+            var profile = AdminHandler.GetUser(user.UserId);
+            var profileModel = AdminModelMapper.Map(profile);
             return View(profileModel);
         }
 
@@ -45,7 +45,7 @@ namespace WebApp.Areas.Admin.Controllers
         [AuthorizeAdmin]
         public ActionResult Edit(AdminModel model)
         {
-            User user = AdminModelMapper.Map(model);
+            var user = AdminModelMapper.Map(model);
             AdminHandler.Update(user);
             return RedirectToAction("Index");
         }
@@ -58,7 +58,7 @@ namespace WebApp.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Login(AdminModel model)
         {
-            User user = AdminHandler.GetUser(model.EmailId, model.Password);
+            var user = AdminHandler.GetUser(model.EmailId, model.Password);
             if (user != null)
             {
                 Session[Constants.AdminUserKeyName] = AdminUser.GetCurrentUser(user);

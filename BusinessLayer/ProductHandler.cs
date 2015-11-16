@@ -13,9 +13,9 @@ namespace BusinessLayer
             _productRepository = productRepository;
         }
 
-        public List<Product> GetList()
+        public List<Product> GetList(bool includeOutOfStock = true)
         {
-            return _productRepository.GetList();
+            return _productRepository.GetList(includeOutOfStock);
         }
 
         public void Add(Product product)
@@ -31,11 +31,6 @@ namespace BusinessLayer
         public void Update(Product product)
         {
             _productRepository.Update(product);
-        }
-
-        public void Delete(int id)
-        {
-            _productRepository.Delete(id);
         }
     }
 }

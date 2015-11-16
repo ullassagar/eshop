@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DataLayer;
 
 namespace WebApp.Models.Shopping
@@ -6,8 +7,11 @@ namespace WebApp.Models.Shopping
     public class OrderModel : MasterModel
     {
         public int OrderId { get; set; }
-        public int MemberId { get; set; }
+        public decimal OrderValue { get; set; }
+        public OrderStatus CurrentOrderStatus { get; set; }
         public List<OrderItemModel> OrderItems { get; set; }
+        public DateTime CreationDate { get; set; }
+        public decimal TotalCbm { get; set; }
 
         public OrderModel()
         {
@@ -23,11 +27,14 @@ namespace WebApp.Models.Shopping
             if (order != null)
             {
                 model.OrderId = order.OrderId;
-                model.MemberId = order.MemberId;
-
+                model.OrderValue = order.OrderValue;
+                model.CurrentOrderStatus = order.CurrentOrderStatus;
+                model.CreationDate = order.CreationDate;
+                model.TotalCbm = order.TotalCbm;
+                model.OrderItems = new List<OrderItemModel>();
                 if (order.OrderItems != null)
                 {
-                    foreach (OrderItem orderItem in order.OrderItems)
+                    foreach (var orderItem in order.OrderItems)
                     {
                         model.OrderItems.Add(OrderItemModelMapper.Map(orderItem));
                     }

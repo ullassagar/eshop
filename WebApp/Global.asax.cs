@@ -38,7 +38,7 @@ namespace WebApp
             builder.RegisterSource(new ViewRegistrationSource());
 
             // Set the dependency resolver to be Autofac.
-            IContainer container = builder.Build();
+            var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
 
             #endregion

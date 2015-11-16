@@ -17,13 +17,13 @@ namespace WebApp.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            Product product = ProductHandler.GetProduct(id);
+            var product = ProductHandler.GetProduct(id);
             if (product == null)
             {
                 return RedirectToAction("Index", "Home");
             }
 
-            ProductModel promodel = ProductModelMapper.Map(product);
+            var promodel = ProductModelMapper.Map(product);
 
             return View(promodel);
         }

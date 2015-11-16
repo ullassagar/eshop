@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UtilityLayer;
 
 namespace DataLayer
@@ -14,28 +10,32 @@ namespace DataLayer
         public string ProductName { get; set; }
         public string EanCode { get; set; }
         public string ImageUrl { get; set; }
-        public decimal Price { get; set; }
         public int Length { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
+        public string Description { get; set; }
+        public decimal Price { get; set; }
+        public bool IsOutOfStock { get; set; }
         public decimal Cbm
         {
             get { return Math.Round(((decimal)(Length * Width * Height) / 1000), 2); }
         }
-        public string Description { get; set; }
 
         public static Product Load(IDataReader reader)
         {
-            var product = new Product();
-            product.ProductId = DbHelper.ConvertToInt32(reader["ProductId"]);
-            product.ProductName = DbHelper.ConvertToString(reader["ProductName"]);
-            product.EanCode = DbHelper.ConvertToString(reader["EanCode"]);
-            product.ImageUrl = DbHelper.ConvertToString(reader["ImageUrl"]);
-            product.Price = DbHelper.ConvertToDecimal(reader["Price"]);
-            product.Length = DbHelper.ConvertToInt32(reader["Length"]);
-            product.Width = DbHelper.ConvertToInt32(reader["Width"]);
-            product.Height = DbHelper.ConvertToInt32(reader["Height"]);
-            product.Description = DbHelper.ConvertToString(reader["Description"]);
+            var product = new Product
+            {
+                ProductId = DbHelper.ConvertToInt32(reader["ProductId"]),
+                ProductName = DbHelper.ConvertToString(reader["ProductName"]),
+                EanCode = DbHelper.ConvertToString(reader["EanCode"]),
+                ImageUrl = DbHelper.ConvertToString(reader["ImageUrl"]),
+                Length = DbHelper.ConvertToInt32(reader["Length"]),
+                Width = DbHelper.ConvertToInt32(reader["Width"]),
+                Height = DbHelper.ConvertToInt32(reader["Height"]),
+                Description = DbHelper.ConvertToString(reader["Description"]), 
+                Price = DbHelper.ConvertToDecimal(reader["Price"]),
+                IsOutOfStock = DbHelper.ConvertToBool(reader["IsOutOfStock"])
+            };
             return product;
         }
     }

@@ -14,8 +14,8 @@ namespace WebApp.Controllers
         public ActionResult Index()
         {
             var user = (PublicUser) Session[Constants.AppUserKeyName];
-            Member member = MemberHandler.GetMember(user.MemberId);
-            MemberModel memberModel = MemberModeMapper.Map(member);
+            var member = MemberHandler.GetMember(user.MemberId);
+            var memberModel = MemberModeMapper.Map(member);
             return View(memberModel);
         }
 
@@ -23,8 +23,8 @@ namespace WebApp.Controllers
         public ViewResult Edit()
         {
             var user = (PublicUser) Session[Constants.AppUserKeyName];
-            Member member = MemberHandler.GetMember(user.MemberId);
-            MemberModel memberModel = MemberModeMapper.Map(member);
+            var member = MemberHandler.GetMember(user.MemberId);
+            var memberModel = MemberModeMapper.Map(member);
             return View(memberModel);
         }
 
@@ -32,7 +32,7 @@ namespace WebApp.Controllers
         [AuthorizeUser]
         public ActionResult Edit(MemberModel model)
         {
-            Member member = MemberModeMapper.Map(model);
+            var member = MemberModeMapper.Map(model);
             MemberHandler.Update(member);
             return RedirectToAction("Index");
         }
@@ -45,21 +45,21 @@ namespace WebApp.Controllers
         [HttpPost]
         public ActionResult Login(MemberModel model)
         {
-            Member member = MemberHandler.GetMember(model.EmailAddress, model.Password);
+            var member = MemberHandler.GetMember(model.EmailAddress, model.Password);
             if (member != null)
             {
                 Session[Constants.AppUserKeyName] = PublicUser.GetCurrentUser(member);
 
-                Cart mongoCart = CartHandler.GetCart(member.MemberId);
+                var mongoCart = CartHandler.GetCart(member.MemberId);
                 var sessionCart = (Cart) Session[Constants.CartKeyName];
 
                 if (sessionCart != null && sessionCart.Items != null && sessionCart.Items.Count > 0)
                 {
                     if (mongoCart != null && mongoCart.Items != null && mongoCart.Items.Count > 0)
                     {
-                        foreach (CartItem sessionItem in sessionCart.Items)
+                        foreach (var sessionItem in sessionCart.Items)
                         {
-                            CartItem mongoItem = mongoCart.Items.Find(p => p.ProductId == sessionItem.ProductId);
+                            var mongoItem = mongoCart.Items.Find(p => p.ProductId == sessionItem.ProductId);
                             if (mongoItem != null)
                             {
                                 mongoItem.ProductCount = sessionItem.ProductCount;
@@ -89,8 +89,8 @@ namespace WebApp.Controllers
         [HttpPost]
         public ActionResult Register(MemberModel model)
         {
-            Member member = MemberModeMapper.Map(model);
-            ErrorCode error = MemberHandler.AddMember(member);
+            var member = MemberModeMapper.Map(model);
+            var error = MemberHandler.AddMember(member);
 
             if (error == ErrorCode.ErrorWhileMemberRegistrationEmailEmpty)
             {

@@ -5,7 +5,6 @@ using WebApp.Models.Products;
 
 namespace WebApp.Controllers
 {
-    //[AuthorizeUser]
     public class HomeController : Controller
     {
         public ProductHandler ProductHandler { get; set; }
@@ -13,7 +12,7 @@ namespace WebApp.Controllers
         public ActionResult Index()
         {
             var model = new HomeModel();
-            var products = ProductHandler.GetList();
+            var products = ProductHandler.GetList(false);
 
             foreach(var product in products)
             {

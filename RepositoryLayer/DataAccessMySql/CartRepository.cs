@@ -9,7 +9,7 @@ namespace RepositoryLayer
         public Cart GetCart(int memberId)
         {
             var repository = new MongoRepository<Cart>();
-            Cart cart = repository.FirstOrDefault(c => c.MemberId == memberId);
+            var cart = repository.FirstOrDefault(c => c.MemberId == memberId);
             return cart ?? new Cart { MemberId = memberId };
         }
 

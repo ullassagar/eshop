@@ -13,46 +13,46 @@ namespace WebApp.Controllers
 
         public ActionResult Index()
         {
-            CartModel model = GetCartModel();
+            var model = GetCartModel();
             return View(model);
         }
 
         public ActionResult Add(int productId = 0, int productCount = 0)
         {
-            Cart cart = GetCart();
+            var cart = GetCart();
             CartHandler.AddProduct(productId, productCount, cart);
             return Json(new {Success = true}, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult ChangeProductCount(int productId = 0, int productCount = 0)
         {
-            Cart cart = GetCart();
+            var cart = GetCart();
             CartHandler.ChangeProductCount(productId, productCount, cart);
             return Json(new {Success = true}, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult RemoveProduct(int productId = 0)
         {
-            Cart cart = GetCart();
+            var cart = GetCart();
             CartHandler.ChangeProductCount(productId, 0, cart);
             return Json(new {Success = true}, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult MiniShoppingCart()
         {
-            CartModel model = GetCartModel();
+            var model = GetCartModel();
             return PartialView("MiniShoppingCart", model);
         }
 
         public ActionResult RefreshShoppingCart()
         {
-            CartModel model = GetCartModel();
+            var model = GetCartModel();
             return PartialView("CartItemsPartial", model);
         }
 
         public ActionResult Confirm()
         {
-            Cart cart = GetCart();
+            var cart = GetCart();
             OrderHandler.ConfirmOrder(ref cart);
             CartHandler.SaveCart(cart);
 
@@ -61,7 +61,7 @@ namespace WebApp.Controllers
 
         private Cart GetCart()
         {
-            PublicUser member = PublicUser.GetCurrentUser();
+            var member = PublicUser.GetCurrentUser();
             if (member != null && member.MemberId > 0)
             {
                 return CartHandler.GetCart(member.MemberId);
@@ -77,8 +77,8 @@ namespace WebApp.Controllers
 
         private CartModel GetCartModel()
         {
-            Cart cart = GetCart();
-            CartModel model = CartModelMapper.Map(cart);
+            var cart = GetCart();
+            var model = CartModelMapper.Map(cart);
             return model;
         }
     }

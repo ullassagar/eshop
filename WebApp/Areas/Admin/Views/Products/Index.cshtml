@@ -3,42 +3,36 @@
 }
 
 <div class="container">
-    <br/>
-             
-                    @Html.ActionLink("Add Product", "Add")
-                
-    <hr />      
-                <table class="table table-bordered table-striped">
-                    <tr>
-                        <th>ProductId</th>
-                        <th>ProductName</th>
-                        <th>EanCode</th>
-                        <th>ImageUrl</th>
-                        <th>Price</th>
-                        <th>Length</th>
-                        <th>Width</th>
-                        <th>Height</th>
-                        <th>Description</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
-                    </tr>
-                    @foreach (var u in Model.ProductList)
-                    {
-                        <tr>
-                            <td>@u.ProductId</td>
-                            <td>@u.ProductName</td>
-                            <td>@u.EanCode</td>
-                            <td>@u.ImageUrl</td>
-                            <td>@u.Price</td>
-                            <td>@u.Length</td>
-                            <td>@u.Width</td>
-                            <td>@u.Height</td>
-                            <td>@u.Description</td>
-                            <td>@Html.ActionLink("Edit", "Edit", "Products", new { id = u.ProductId }, null)</td>
-                            <td>@Html.ActionLink("Delete", "Delete", "Products", new { id = u.ProductId }, new { onclick = "return confirm('Are you Sure you want to delete this record?')" })</td>
-                        </tr>
-                    }
-                </table>
-          
-       
+    <br />
+    @Html.ActionLink("Add Product", "Add")
+    <hr />
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>ProductId</th>
+            <th>ProductName</th>
+            <th>EanCode</th>
+            <th>ImageUrl</th>
+            <th>Price</th>
+            <th>Length</th>
+            <th>Width</th>
+            <th>Height</th>
+            <th>Description</th>
+            <th>Edit</th>
+        </tr>
+        @foreach (var u in Model.ProductList)
+        {
+            <tr>
+                <td>@u.ProductId</td>
+                <td>@u.ProductName</td>
+                <td>@u.EanCode</td>
+                <td>@u.ImageUrl</td>
+                <td>@u.Price</td>
+                <td>@u.Length</td>
+                <td>@u.Width</td>
+                <td>@u.Height</td>
+                <td>@u.Description</td>
+                <td>@Html.ActionLink("Edit", "Edit", "Products", new { id = u.ProductId }, null)</td>
+            </tr>
+        }
+    </table>
 </div>

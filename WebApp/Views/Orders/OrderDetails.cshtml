@@ -1,0 +1,71 @@
+﻿@model  WebApp.Models.Shopping.OrderModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutLoggedIn.cshtml";
+}
+
+<div class="container">
+    <h4>Order @Model.OrderId</h4>
+    <br />
+    <div class="row text-primary">
+        <div class="col-md-2">
+            Product
+        </div>
+        <div class="col-md-2">
+            Cbm
+        </div>
+        <div class="col-md-2">
+            Price
+        </div>
+        <div class="col-md-2">
+            Count
+        </div>
+        <div class="col-md-2">
+            Total
+        </div>
+        <div class="col-md-1">
+            &nbsp;
+        </div>
+        <div class="row">
+            <div class="col-md-8">&nbsp;</div>
+        </div>
+    </div>
+    @foreach (var item in Model.OrderItems)
+    {
+        <div class="row">
+            <div class="col-md-2">
+                <img class="img-responsive" src="\Images\Products\@item.ImageUrl" alt="@item.ProductName" width="50" height="50">
+                <div class="mt5 text-capital">
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </div>
+            </div>
+            <div class="col-md-2">
+                @Html.DisplayFor(modelItem => item.Cbm)
+            </div>
+            <div class="col-md-2">
+                @Html.DisplayFor(modelItem => item.PriceOut)
+            </div>
+            <div class="col-md-2">
+                @Html.DisplayFor(modelItem => item.ProductCount)
+            </div>
+            <div class="col-md-2">
+                Cbm: @Html.DisplayFor(modelItem => item.TotalCbm) m&#179;<br />
+                Price: @Html.DisplayFor(modelItem => item.TotalPriceOut) kr
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-10">&nbsp;</div>
+        </div>
+    }
+    <hr />
+    <div class="row">
+        <div class="col-md-7">&nbsp;</div>
+        <div class="col-md-2 text-right">Total Cbm:</div>
+        <div class="col-md-2">@Html.DisplayFor(model => model.TotalCbm) m&#179;</div>
+    </div>
+    <div class="row">
+        <div class="col-md-7">&nbsp;</div>
+        <div class="col-md-2 text-right">Total Price:</div>
+        <div class="col-md-2">@Html.DisplayFor(model => model.OrderValue) kr</div>
+    </div>
+</div>

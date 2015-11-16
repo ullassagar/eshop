@@ -34,7 +34,7 @@
                     @if (Session["PublicUser"] != null)
                     {
                         <li>@Html.ActionLink("Orders","Index","Orders")</li>
-                        <li>@Html.ActionLink("My Profile", "Index", "Account")</li>
+                        <li>@Html.ActionLink("Profile", "Index", "Account")</li>
                         <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
                     }
                     else

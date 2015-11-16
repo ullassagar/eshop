@@ -14,7 +14,7 @@ namespace DataLayer
         {
             get
             {
-                int total = 0;
+                var total = 0;
                 if (Items != null)
                 {
                     total += Items.Sum(cartItem => cartItem.ProductCount);

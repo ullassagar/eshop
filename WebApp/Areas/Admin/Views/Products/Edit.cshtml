@@ -1,11 +1,9 @@
-﻿@using WebApp.Areas.Admin
-@model WebApp.Areas.Admin.Models.ProductsModel
+﻿@model WebApp.Areas.Admin.Models.ProductModel
 
 <div class="container">
     <div class="row">
         <div class="col-md-10 border">
             <h3>Edit Product</h3>
-
             @using (Html.BeginForm("Edit", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
                 @Html.HiddenFor(e => e.ProductId)
@@ -43,14 +41,6 @@
                     &nbsp;
                 </div>
                 <div class="row">
-                    <div class="col-md-2">@Html.Label("Price")</div>
-                    <div class="col-md-4">@Html.TextBoxFor(u => u.Price, new { @class = "form-control" })</div>
-                    <div class="col-md-4">@Html.ValidationMessageFor(u => u.Price)</div>
-                </div>
-                <div class="row">
-                    &nbsp;
-                </div>
-                <div class="row">
                     <div class="col-md-2">@Html.Label("Length")</div>
                     <div class="col-md-4">@Html.TextBoxFor(u => u.Length, new { @class = "form-control" })</div>
                     <div class="col-md-4">@Html.ValidationMessageFor(u => u.Length)</div>
@@ -75,9 +65,24 @@
                     &nbsp;
                 </div>
                 <div class="row">
-                    <div class="col-md-2">@Html.Label("DEscriptipn")</div>
+                    <div class="col-md-2">@Html.Label("Descriptipn")</div>
                     <div class="col-md-4">@Html.TextAreaFor(u => u.Description, new { @class = "form-control" })</div>
                     <div class="col-md-4">@Html.ValidationMessageFor(u => u.Description)</div>
+                </div>
+                <div class="row">
+                    &nbsp;
+                </div>
+                <div class="row">
+                    <div class="col-md-2">@Html.Label("Price")</div>
+                    <div class="col-md-4">@Html.TextBoxFor(u => u.Price, new { @class = "form-control" })</div>
+                    <div class="col-md-4">@Html.ValidationMessageFor(u => u.Price)</div>
+                </div>
+                <div class="row">
+                    &nbsp;
+                </div>
+                <div class="row">
+                    <div class="col-md-2">@Html.Label("IsOutOfStock")</div>
+                    <div class="col-md-4">@Html.CheckBoxFor(u => u.IsOutOfStock, new { @class = "form-control" })</div>
                 </div>
                 <div class="row">
                     &nbsp;
@@ -90,7 +95,6 @@
                         @Html.ActionLink("Back", "Index", null, new { @class = "mt10 btn btn-primary" })
                     </div>
                 </div>
-
                 if (!string.IsNullOrEmpty(@Model.Error))
                 {
                     <div class="mt10 row">
@@ -99,7 +103,6 @@
                 }
             }
             <br />
-
         </div>
     </div>
 </div>
