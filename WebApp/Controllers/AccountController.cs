@@ -77,6 +77,7 @@ namespace WebApp.Controllers
                 }
 
                 Session[Constants.CartKeyName] = null;
+                mongoCart.MemberId = member.MemberId;
                 CartHandler.SaveCart(mongoCart);
 
                 return RedirectToAction("Index", "Home", new {area = ""});

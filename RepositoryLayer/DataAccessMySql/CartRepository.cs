@@ -15,14 +15,17 @@ namespace RepositoryLayer
 
         public void SaveCart(Cart cart)
         {
-            var repository = new MongoRepository<Cart>();
-            if (string.IsNullOrEmpty(cart.Id))
+            if (cart.MemberId > 0)
             {
-                repository.Add(cart);
-            }
-            else
-            {
-                repository.Update(cart);
+                var repository = new MongoRepository<Cart>();
+                if (string.IsNullOrEmpty(cart.Id))
+                {
+                    repository.Add(cart);
+                }
+                else
+                {
+                    repository.Update(cart);
+                }
             }
         }
     }

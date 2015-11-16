@@ -43,7 +43,7 @@ namespace RepositoryLayer
 
         private void ClearCart(ref Cart cart)
         {
-            cart = new Cart { Id = cart.Id };
+            cart = new Cart { Id = cart.Id, MemberId = cart.MemberId };
         }
 
         public List<int> GetOrderIds(int memberId)
@@ -139,7 +139,7 @@ namespace RepositoryLayer
 
                         reader = MysqlRepository.ExecuteReader(connection, sql, null, true);
                         using (reader)
-                            if (reader.Read())
+                            while (reader.Read())
                             {
                                 order.OrderItems.Add(OrderItem.Load(reader));
                             }

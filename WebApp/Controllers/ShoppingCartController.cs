@@ -21,21 +21,36 @@ namespace WebApp.Controllers
         {
             var cart = GetCart();
             CartHandler.AddProduct(productId, productCount, cart);
-            return Json(new {Success = true}, JsonRequestBehavior.AllowGet);
+            var member = PublicUser.GetCurrentUser();
+            if (member == null || member.MemberId <= 0)
+            {
+                Session[Constants.CartKeyName] = cart;
+            }
+            return Json(new { Success = true }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult ChangeProductCount(int productId = 0, int productCount = 0)
         {
             var cart = GetCart();
             CartHandler.ChangeProductCount(productId, productCount, cart);
-            return Json(new {Success = true}, JsonRequestBehavior.AllowGet);
+            var member = PublicUser.GetCurrentUser();
+            if (member == null || member.MemberId <= 0)
+            {
+                Session[Constants.CartKeyName] = cart;
+            }
+            return Json(new { Success = true }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult RemoveProduct(int productId = 0)
         {
             var cart = GetCart();
             CartHandler.ChangeProductCount(productId, 0, cart);
-            return Json(new {Success = true}, JsonRequestBehavior.AllowGet);
+            var member = PublicUser.GetCurrentUser();
+            if (member == null || member.MemberId <= 0)
+            {
+                Session[Constants.CartKeyName] = cart;
+            }
+            return Json(new { Success = true }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult MiniShoppingCart()
@@ -66,7 +81,7 @@ namespace WebApp.Controllers
             {
                 return CartHandler.GetCart(member.MemberId);
             }
-            var cart = (Cart) Session[Constants.CartKeyName];
+            var cart = (Cart)Session[Constants.CartKeyName];
             if (cart == null)
             {
                 cart = new Cart();
