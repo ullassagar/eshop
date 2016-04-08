@@ -2,11 +2,17 @@
 using System.Collections.Generic;
 using System.Data;
 using DataLayer;
+using RepositoryLayer.Infrastructure;
 
 namespace RepositoryLayer
 {
-    public class OrdersRepository : IOrdersRepository
+    public class OrdersRepository : GenericSqlRepository<Order>, IOrdersRepository
     {
+        public OrdersRepository(IDatabaseFactory databaseFactory)
+            : base(databaseFactory)
+        {
+        }
+
         public int ConfirmOrder(ref Cart cart)
         {
             var orderId = 0;
@@ -18,7 +24,7 @@ namespace RepositoryLayer
                 var sql = string.Format(@"INSERT INTO Orders(MemberId, OrderValue, CreationDate) VALUES({0}, {1}, NOW()); SELECT LAST_INSERT_ID();", cart.MemberId, cart.CartTotalPriceOut);
                 orderId = Convert.ToInt32(MysqlRepository.ExecuteScalarWithOpenConnection(connection, transaction, sql, null));
 
-                sql = string.Format("INSERT INTO OrderOrderStatus(OrderId, OrderStatusId, CreationDate) VALUES({0}, {1}, NOW()); SELECT LAST_INSERT_ID();", orderId, (int)OrderStatus.Confirmed);
+                sql = string.Format("INSERT INTO OrderOrderStatus(OrderId, OrderStatusId, CreationDate) VALUES({0}, {1}, NOW()); SELECT LAST_INSERT_ID();", orderId, (int)OrderStatusType.Confirmed);
                 var orderOrderStatusId = Convert.ToInt32(MysqlRepository.ExecuteScalarWithOpenConnection(connection, transaction, sql, null));
 
                 sql = string.Format("UPDATE Orders SET LatestOrderStatusId={0} WHERE OrderId={1};", orderOrderStatusId, orderId);

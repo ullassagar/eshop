@@ -8,7 +8,7 @@ namespace WebApp.Models.Shopping
     {
         public int OrderId { get; set; }
         public decimal OrderValue { get; set; }
-        public OrderStatus CurrentOrderStatus { get; set; }
+        public OrderStatusType CurrentOrderStatus { get; set; }
         public List<OrderItemModel> OrderItems { get; set; }
         public DateTime CreationDate { get; set; }
         public decimal TotalCbm { get; set; }

@@ -11,11 +11,7 @@ namespace WebApp
 
         public static AdminUser GetCurrentUser()
         {
-
             return (AdminUser)HttpContext.Current.Session[Constants.AdminUserKeyName];
-
-            //return new AdminUser { UserId = 1, UserName = "Admin" };
-            //return (AdminUser)HttpContext.Current.Session[Constants.AdminUserKeyName];
         }
 
         public static AdminUser GetCurrentUser(User user)

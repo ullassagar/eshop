@@ -1,16 +1,19 @@
 ﻿using System.Collections.Generic;
 using DataLayer;
 using RepositoryLayer;
+using RepositoryLayer.Infrastructure;
 
 namespace BusinessLayer
 {
     public class ProductHandler
     {
         private readonly IProductRepository _productRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public ProductHandler(IProductRepository productRepository)
+        public ProductHandler(IProductRepository productRepository, IUnitOfWork unitOfWork)
         {
             _productRepository = productRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public List<Product> GetList(bool includeOutOfStock = true)

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using UtilityLayer;
 
@@ -6,6 +7,7 @@ namespace DataLayer
 {
     public class OrderItem
     {
+        [Key]
         public int OrderDetailId { get; set; }
         public int OrderId { get; set; }
         public int ProductId { get; set; }
@@ -17,10 +19,12 @@ namespace DataLayer
         public int Length { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
+    
         public decimal Cbm
         {
             get { return Math.Round(((decimal)(Length * Width * Height) / 1000), 2); }
         }
+    
         public decimal TotalCbm
         {
             get { return Math.Round(ProductCount * Cbm, 2); }
@@ -28,7 +32,7 @@ namespace DataLayer
 
         public static OrderItem Load(IDataReader reader)
         {
-            var item = new OrderItem
+            return new OrderItem
             {
                 OrderDetailId = DbHelper.ConvertToInt32(reader["OrderDetailId"]),
                 OrderId = DbHelper.ConvertToInt32(reader["OrderId"]),
@@ -42,8 +46,6 @@ namespace DataLayer
                 Width = DbHelper.ConvertToInt32(reader["Width"]),
                 Height = DbHelper.ConvertToInt32(reader["Height"])
             };
-
-            return item;
         }
     }
 }

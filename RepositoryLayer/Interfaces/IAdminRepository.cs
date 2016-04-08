@@ -2,10 +2,9 @@
 
 namespace RepositoryLayer
 {
-    public interface IAdminRepository
+    public interface IAdminRepository : Repositories.IRepository<User>
     {
         User GetUser(int userId);
         User GetUser(string emailAddress, string password);
-        void Update(User user);
     }
 }

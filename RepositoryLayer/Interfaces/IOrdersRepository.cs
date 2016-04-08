@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace RepositoryLayer
 {
-    public interface IOrdersRepository
+    public interface IOrdersRepository : Repositories.IRepository<Order>
     {
         int ConfirmOrder(ref Cart cart);
         List<int> GetOrderIds(int memberId);

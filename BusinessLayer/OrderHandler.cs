@@ -1,16 +1,19 @@
 ﻿using System.Collections.Generic;
 using DataLayer;
 using RepositoryLayer;
+using RepositoryLayer.Infrastructure;
 
 namespace BusinessLayer
 {
     public class OrderHandler
     {
         private readonly IOrdersRepository _ordersRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public OrderHandler(IOrdersRepository ordersRepository)
+        public OrderHandler(IOrdersRepository ordersRepository, IUnitOfWork unitOfWork)
         {
             _ordersRepository = ordersRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public int ConfirmOrder(ref Cart cart)

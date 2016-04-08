@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace RepositoryLayer
 {
-    public interface IProductRepository
+    public interface IProductRepository : Repositories.IRepository<Product>
     {
         List<Product> GetList(bool includeOutOfStock = true);
         Product GetProduct(int productId);

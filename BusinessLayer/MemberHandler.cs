@@ -1,15 +1,18 @@
 ﻿using DataLayer;
 using RepositoryLayer;
+using RepositoryLayer.Infrastructure;
 
 namespace BusinessLayer
 {
     public class MemberHandler
     {
-        private readonly IMemberRepository _memberRepository = null;
+        private readonly IMemberRepository _memberRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public MemberHandler(IMemberRepository memberRepository)
+        public MemberHandler(IMemberRepository memberRepository, IUnitOfWork unitOfWork)
         {
             _memberRepository = memberRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public Member GetMember(int memberId)
