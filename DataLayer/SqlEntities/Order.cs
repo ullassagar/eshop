@@ -13,6 +13,7 @@ namespace DataLayer
         public int OrderId { get; set; }
         public int MemberId { get; set; }
         public decimal OrderValue { get; set; }
+        public int LatestOrderStatusId { get; set; }
         public OrderStatusType CurrentOrderStatus { get; set; }
         public ICollection<OrderItem> OrderItems { get; set; }
         public DateTime CreationDate { get; set; }

@@ -22,7 +22,7 @@ namespace RepositoryLayer
 
         protected IDatabaseFactory DatabaseFactory { get; private set; }
 
-        protected SqlDbContext DataContext
+        public SqlDbContext DataContext
         {
             get { return dataContext ?? (dataContext = DatabaseFactory.Get()); }
         }

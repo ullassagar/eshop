@@ -33,7 +33,12 @@ namespace BusinessLayer
             if (string.IsNullOrEmpty(member.Password))
                 return ErrorCode.ErrorWhileMemberRegistrationPasswordEmpty;
 
-            return _memberRepository.AddMember(member);
+            ErrorCode errorCode= _memberRepository.AddMember(member);
+            if (errorCode == ErrorCode.None)
+            {
+                Save();
+            }
+            return errorCode;
         }
 
         public void Update(Member member)
@@ -41,5 +46,9 @@ namespace BusinessLayer
             _memberRepository.Update(member);
         }
 
+        public void Save()
+        {
+            _unitOfWork.Commit();
+        }
     }
 }

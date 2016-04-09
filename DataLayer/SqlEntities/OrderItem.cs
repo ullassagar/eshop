@@ -19,7 +19,8 @@ namespace DataLayer
         public int Length { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
-    
+        public DateTime CreationDate { get; set; }
+
         public decimal Cbm
         {
             get { return Math.Round(((decimal)(Length * Width * Height) / 1000), 2); }

@@ -8,6 +8,7 @@ namespace RepositoryLayer.Repositories
 {
     public interface IRepository<T> where T : class
     {
+        SqlDbContext DataContext { get; }
         void Add(T entity);
         void Update(T entity);
         void Delete(T entity);

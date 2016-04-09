@@ -77,11 +77,23 @@
     <Compile Include="Infrastructure\IDatabaseFactory.cs" />
     <Compile Include="Infrastructure\Page.cs" />
     <Compile Include="Infrastructure\IRepository.cs" />
+    <Compile Include="Interfaces\IOrderItemRepository.cs" />
+    <Compile Include="Interfaces\IOrderOrderStatusRepository.cs" />
     <Compile Include="Migrations\201604080845168_BaseMigrations.cs" />
     <Compile Include="Migrations\201604080845168_BaseMigrations.Designer.cs">
       <DependentUpon>201604080845168_BaseMigrations.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201604091219469_OrderStatus.cs" />
+    <Compile Include="Migrations\201604091219469_OrderStatus.Designer.cs">
+      <DependentUpon>201604091219469_OrderStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604091225369_CreationDate added.cs" />
+    <Compile Include="Migrations\201604091225369_CreationDate added.Designer.cs">
+      <DependentUpon>201604091225369_CreationDate added.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="SqlDataAccess\OrderItemRepository.cs" />
+    <Compile Include="SqlDataAccess\OrderOrderStatusRepository.cs" />
     <Compile Include="SqlDbContext.cs" />
     <Compile Include="SqlDataAccess\AdminRepository.cs" />
     <Compile Include="Interfaces\ICartRepository.cs" />
@@ -110,6 +122,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201604080845168_BaseMigrations.resx">
       <DependentUpon>201604080845168_BaseMigrations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604091219469_OrderStatus.resx">
+      <DependentUpon>201604091219469_OrderStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604091225369_CreationDate added.resx">
+      <DependentUpon>201604091225369_CreationDate added.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

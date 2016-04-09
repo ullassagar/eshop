@@ -100,6 +100,16 @@ namespace RepositoryLayer.Migrations
                         EmailId = c.String(),
                     })
                 .PrimaryKey(t => t.UserId);
+
+            Sql(@"insert  into [user](UserName,Password,EmailId) values 
+                ('admin','admin','ullas.m@indpro.se');");
+
+             Sql(@"insert  into [product](ProductName,EanCode,ImageUrl,Length,Width,Height,Description,Price,CreationDate,LastModifiedDate,IsOutOfStock) values 
+                ('Mirror','10022','14.png',50,10,100,'some description','1200','2015-11-15 17:25:20',NULL,0),
+                ('Bean bag','123411','15.png',50,50,80,NULL,'1400','2015-11-15 17:25:22',NULL,0),
+                ('Set of tables','153369','16.png',10,50,100,NULL,'1402','2015-11-15 17:25:25',NULL,0),
+                ('King sized bed','34972','17.png',200,200,200,NULL,'4000','2015-11-15 17:25:26',NULL,0),
+                ('Simple bed','14526','18.png',210,230,100,NULL,'2100','2015-11-15 17:25:28',NULL,0);");
             
         }
         

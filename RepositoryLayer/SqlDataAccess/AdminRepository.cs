@@ -21,10 +21,5 @@ namespace RepositoryLayer
         {
             return Get(user => user.EmailId == emailAddress && user.Password == password);
         }
-
-        public void Update(User user)
-        {
-            Update(user);
-        }
     }
 }
