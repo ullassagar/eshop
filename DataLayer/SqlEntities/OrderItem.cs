@@ -30,23 +30,5 @@ namespace DataLayer
         {
             get { return Math.Round(ProductCount * Cbm, 2); }
         }
-
-        public static OrderItem Load(IDataReader reader)
-        {
-            return new OrderItem
-            {
-                OrderDetailId = DbHelper.ConvertToInt32(reader["OrderDetailId"]),
-                OrderId = DbHelper.ConvertToInt32(reader["OrderId"]),
-                ProductId = DbHelper.ConvertToInt32(reader["ProductId"]),
-                ProductCount = DbHelper.ConvertToInt32(reader["ProductCount"]),
-                PriceOut = DbHelper.ConvertToDecimal(reader["PriceOut"]),
-                TotalPriceOut = DbHelper.ConvertToDecimal(reader["TotalPriceOut"]),
-                ProductName = DbHelper.ConvertToString(reader["ProductName"]),
-                ImageUrl = DbHelper.ConvertToString(reader["ImageUrl"]),
-                Length = DbHelper.ConvertToInt32(reader["Length"]),
-                Width = DbHelper.ConvertToInt32(reader["Width"]),
-                Height = DbHelper.ConvertToInt32(reader["Height"])
-            };
-        }
     }
 }

@@ -1,0 +1,43 @@
+﻿@model WebApp.Areas.Admin.Models.CategoryModel
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 border">
+            <h3>Add Product</h3>
+            @using (Html.BeginForm("Add", "Category", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.HiddenFor(e => e.CategoryId)
+                <div class="row">
+                    &nbsp;
+                </div>
+                <div class="row">
+                    <div class="col-md-2">@Html.Label("Name")</div>
+                    <div class="col-md-4">@Html.TextBoxFor(u => u.CategoryName, new { @class = "form-control" })</div>
+                    <div class="col-md-4">@Html.ValidationMessageFor(u => u.CategoryName)</div>
+                </div>
+                <div class="row">
+                    &nbsp;
+                </div>
+                <div class="row">
+                    &nbsp;
+                </div>
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
+                        <input type="submit" value="Submit" class="mt10 btn btn-primary" />
+                        <span>&nbsp;&nbsp;</span>
+                        @Html.ActionLink("Back", "Index", null, new { @class = "mt10 btn btn-primary" })
+                    </div>
+                </div>
+
+                if (!string.IsNullOrEmpty(@Model.Error))
+                {
+                    <div class="mt10 row">
+                        <div class="col-md-5 alert-danger">@Model.Error</div>
+                    </div>
+                }
+            }
+            <br />
+        </div>
+    </div>
+</div>

@@ -6,37 +6,36 @@ using RepositoryLayer.Infrastructure;
 
 namespace BusinessLayer
 {
-    public class ProductHandler
+    public class CategoryHandler
     {
-        private readonly IProductRepository _productRepository;
+        private readonly ICategoryRepository _productRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public ProductHandler(IProductRepository productRepository, IUnitOfWork unitOfWork)
+        public CategoryHandler(ICategoryRepository productRepository, IUnitOfWork unitOfWork)
         {
             _productRepository = productRepository;
             _unitOfWork = unitOfWork;
         }
 
-        public List<Product> GetList(bool includeOutOfStock = true)
+        public List<Category> GetAll()
         {
-            return _productRepository.GetList(includeOutOfStock);
+            return _productRepository.GetAll().ToList();
         }
 
-        public void Add(Product product)
+        public void Add(Category product)
         {
             _productRepository.Add(product);
             _unitOfWork.Commit();
         }
 
-        public Product GetById(int productId)
+        public Category GetById(int productId)
         {
             return _productRepository.GetById(productId);
         }
 
-        public void Update(Product product)
+        public void Update(Category product)
         {
             _productRepository.Update(product);
-            _unitOfWork.Commit();
         }
     }
 }

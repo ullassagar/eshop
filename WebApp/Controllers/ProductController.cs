@@ -17,7 +17,7 @@ namespace WebApp.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            var product = ProductHandler.GetProduct(id);
+            var product = ProductHandler.GetById(id);
             if (product == null)
             {
                 return RedirectToAction("Index", "Home");

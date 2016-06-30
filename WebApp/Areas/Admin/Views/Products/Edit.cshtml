@@ -7,6 +7,8 @@
             @using (Html.BeginForm("Edit", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
                 @Html.HiddenFor(e => e.ProductId)
+                @Html.HiddenFor(e => e.CreationDate)
+                @Html.HiddenFor(e => e.LastModifiedDate)
                 <div class="row">
                     <div class="col-md-2">@Html.Label("Image")</div>
                     <div class="col-md-8">

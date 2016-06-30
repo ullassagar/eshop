@@ -1,7 +1,5 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.Data;
-using UtilityLayer;
 
 namespace DataLayer
 {
@@ -9,6 +7,7 @@ namespace DataLayer
     {
         [Key]
         public int ProductId { get; set; }
+
         public string ProductName { get; set; }
         public string EanCode { get; set; }
         public string ImageUrl { get; set; }
@@ -21,9 +20,11 @@ namespace DataLayer
         public DateTime CreationDate { get; set; }
         public DateTime? LastModifiedDate { get; set; }
 
+        public Category Category { get; set; }
+
         public decimal Cbm
         {
-            get { return Math.Round(((decimal)(Length * Width * Height) / 1000), 2); }
+            get { return Math.Round(((decimal) (Length*Width*Height)/1000), 2); }
         }
     }
 }

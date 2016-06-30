@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="NoSqlEntities\CartItem.cs" />
     <Compile Include="ErrorCode.cs" />
+    <Compile Include="SqlEntities\Category.cs" />
     <Compile Include="SqlEntities\Member.cs" />
     <Compile Include="SqlEntities\Order.cs" />
     <Compile Include="SqlEntities\OrderItem.cs" />
@@ -83,9 +84,7 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Configurations\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

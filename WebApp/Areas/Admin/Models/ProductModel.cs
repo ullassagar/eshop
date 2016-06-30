@@ -24,6 +24,10 @@ namespace WebApp.Areas.Admin.Models
         {
             ProductList = new List<ProductModel>();
         }
+
+        public System.DateTime CreationDate { get; set; }
+
+        public System.DateTime? LastModifiedDate { get; set; }
     }
 
     public class ProductModelMapper
@@ -43,6 +47,8 @@ namespace WebApp.Areas.Admin.Models
                 model.Description = product.Description;
                 model.Price = product.Price;
                 model.IsOutOfStock = product.IsOutOfStock;
+                model.CreationDate = product.CreationDate;
+                model.LastModifiedDate = product.LastModifiedDate;
             }
             return model;
         }
@@ -62,6 +68,8 @@ namespace WebApp.Areas.Admin.Models
                 product.Description = model.Description;
                 product.Price = model.Price;
                 product.IsOutOfStock = model.IsOutOfStock;
+                product.CreationDate = model.CreationDate;
+                product.LastModifiedDate = model.LastModifiedDate;
             }
             return product;
         }

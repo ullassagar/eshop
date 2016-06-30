@@ -1,0 +1,26 @@
+﻿@model  List<WebApp.Areas.Admin.Models.CategoryModel>
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutLoggedIn.cshtml";
+}
+
+<div class="container">
+    <br />
+    @Html.ActionLink("Add Category", "Add")
+    <hr />
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>CategoryId</th>
+            <th>CategoryName</th>
+            <th>Edit</th>
+        </tr>
+        @foreach (var u in Model)
+        {
+            <tr>
+                <td>@u.CategoryId</td>
+                <td>@u.CategoryName</td>
+                <td>@Html.ActionLink("Edit", "Edit", "Category", new { id = u.CategoryId }, null)</td>
+            </tr>
+        }
+    </table>
+</div>

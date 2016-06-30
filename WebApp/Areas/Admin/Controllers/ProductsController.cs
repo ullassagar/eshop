@@ -35,6 +35,7 @@ namespace WebApp.Areas.Admin.Controllers
             var product = ProductModelMapper.Map(model);
             try
             {
+                product.CreationDate = DateTime.Now;
                 ProductHandler.Add(product);
                 product.ImageUrl = product.ProductId + ".png";
                 if (file != null && file.ContentLength > 0)
@@ -54,7 +55,7 @@ namespace WebApp.Areas.Admin.Controllers
 
         public ActionResult Edit(int id = 0)
         {
-            var product = ProductHandler.GetProduct(id);
+            var product = ProductHandler.GetById(id);
             var proModel = ProductModelMapper.Map(product);
             return View(proModel);
         }
@@ -70,6 +71,7 @@ namespace WebApp.Areas.Admin.Controllers
                     file.SaveAs(path);
                 }
                 var product = ProductModelMapper.Map(model);
+                product.LastModifiedDate = DateTime.Now;
                 ProductHandler.Update(product);
             }
             catch (Exception ex)

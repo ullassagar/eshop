@@ -29,17 +29,5 @@ namespace DataLayer
                 return Math.Round(total, 2);
             }
         }
-
-        public static Order Load(IDataReader reader)
-        {
-            return new Order
-            {
-                OrderId = DbHelper.ConvertToInt32(reader["OrderId"]),
-                MemberId = DbHelper.ConvertToInt32(reader["MemberId"]),
-                CurrentOrderStatus = (OrderStatusType)DbHelper.ConvertToInt32(reader["OrderStatusId"]),
-                OrderValue = DbHelper.ConvertToDecimal(reader["OrderValue"]),
-                CreationDate = DbHelper.ConvertToDateTime(reader["CreationDate"])
-            };
-        }
     }
 }
